@@ -16,6 +16,7 @@ S_CLIENT.bind(('localhost', CLIENT_PORT))
 
 def main_receive_loop(file_name):
     seq_number = 0
+    buffer = []
     pkt = PacketHelper.create_pkt_from_data(seq_number, file_name)
     while True:
         S_CLIENT.sendto(pkt, (SERVER_IP, SERVER_PORT))
@@ -28,10 +29,14 @@ def main_receive_loop(file_name):
             # Last packet is not received
             continue
         # Acknowledge received packet
+        buffer.append(pkt_data.data)
         pkt = PacketHelper.create_pkt_from_data(seq_number, 'Ack{}'.format(seq_number))
         seq_number = (seq_number + 1) % 2
-
+        if pkt_data.last_pkt:
+            with open("outputs/sw_{}".format(file_name), 'w') as f:
+                f.write(buffer)
+            print("FILE RECEIVED AND SAVED...")
 
 if __name__ == '__main__':
-    file_name = 'big_file.txt'
+    file_name = 'inputs/big_file.txt'
     main_receive_loop(file_name)

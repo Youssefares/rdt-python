@@ -10,7 +10,7 @@ from DemuxHandler import DemuxHandler
 
 # Constants
 CONFIG_FILE = "inputs/server.in"
-PACKET_LEN = 50
+PACKET_LEN = 500
 
 # CMD args
 if len(sys.argv) > 2:

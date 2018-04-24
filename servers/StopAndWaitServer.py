@@ -1,5 +1,6 @@
 from helpers import PacketHelper
 import socket
+from collections import deque
 
 class StopAndWaitServer:
     """
@@ -12,6 +13,7 @@ class StopAndWaitServer:
         """
         self.client_entry = client_entry
         self.seq = 0
+        self.file_packets_queue = None
 
     def start(self):
         """
@@ -35,13 +37,16 @@ class StopAndWaitServer:
             # else check the packet type if data or acknowledgement
             if parsed_pkt.type == 'Ack':
                 self.seq = (self.seq + 1) % 2
-                # TODO: send next packet in file
-                S_SERVER.sendto(PacketHelper.create_pkt_from_data(self.seq, file_name),
-                                self.client_entry.client_address)
+                if len(self.file_packets_queue):
+                    S_SERVER.sendto(PacketHelper.create_pkt_from_data(self.seq, self.file_packets_queue.popleft()),
+                                    self.client_entry.client_address)
+                else:
+                    print("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
+                    break
             else:
-                # TODO: get requested file and send it
                 file_name = parsed_pkt.data
-                S_SERVER.sendto(PacketHelper.create_pkt_from_data(self.seq, file_name),
+                self.file_packets_queue = deque(PacketHelper.get_file_packets(file_name, PacketHelper.PACKET_LENGTH))
+                S_SERVER.sendto(PacketHelper.create_pkt_from_data(self.seq, self.file_packets_queue.popleft()),
                                 self.client_entry.client_address)
             self.client_entry.e.clear()
 
