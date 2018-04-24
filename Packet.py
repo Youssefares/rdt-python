@@ -12,7 +12,6 @@ class Packet:
     self.seq_num = seq_num
     self.data = data
 
-
   def bytes(self):
     """ return packet in form of bytes"""
     return bytes([self.check_sum, self.seq_num, self.len])\

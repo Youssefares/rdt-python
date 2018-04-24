@@ -5,6 +5,7 @@ connections on top of a single UDP Connection
 
 from threading import Thread, Event, active_count
 import socket
+from servers import StopAndWaitServer
 
 class SWEntry:
     __slots__ = ['e', 'pkt', 'client_address']
@@ -56,7 +57,7 @@ class DemuxHandler:
                 print("CREATING NEW SERVER HANDLER")
                 th_entry = self._get_new_SW_thread_table_entry(address)
                 self.threads_table[address] = th_entry
-                th = Thread(target=DemuxHandler._debug_dummy_server, args=[packet, th_entry], daemon=True)
+                th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry], daemon=True)
                 th.setName('SW Thread # {}'.format(active_count()))
                 th.start()
                 self._pass_packet(packet, address)
@@ -86,7 +87,7 @@ class DemuxHandler:
         return SWEntry(e=Event(), pkt=None, client_address=address)
 
     @staticmethod
-    def _debug_dummy_server(packet, entry):
+    def _debug_dummy_server(entry):
         pkt_count = 0
         print("Server Thread running...")
         S_SERVER = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -94,7 +95,7 @@ class DemuxHandler:
         while True:
             e, pkt, client_address = entry.get_tuple()
             e.wait()
-            print("PACKET #{}, {}".format(pkt_count, packet))
-            S_SERVER.sendto(bytearray('Ack', encoding='utf-8'), client_address)
+            print("PACKET #{}, {}".format(pkt_count, pkt))
+            # S_SERVER.sendto(bytearray('Ack', encoding='utf-8'), client_address)
             pkt_count += 1
             e.clear()
