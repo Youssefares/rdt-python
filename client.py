@@ -38,6 +38,7 @@ def send_file_name(s_client):
   ready = select.select([s_client], [], [], 5)
   if ready[0]:
     packet, addr = s_client.recvfrom(512) #Buffer_size = 512
+    print(packet)
     if addr == (SERVER_IP, SERVER_PORT):
       print("Reply received from: ", addr)
       # Broadcast reply_event to stop sending requests

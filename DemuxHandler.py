@@ -4,18 +4,18 @@ connections on top of a single UDP Connection
 """
 
 from threading import Thread, Event, active_count
-from collections import namedtuple
-
+import socket
 
 class SWEntry:
-    __slots__ = ['e', 'pkt']
+    __slots__ = ['e', 'pkt', 'client_address']
 
-    def __init__(self, e, pkt):
+    def __init__(self, e, pkt, client_address):
         self.e = e
         self.pkt = pkt
+        self.client_address = client_address
 
     def get_tuple(self):
-        return self.e, self.pkt
+        return self.e, self.pkt, self.client_address
 
 
 class DemuxHandler:
@@ -27,7 +27,7 @@ class DemuxHandler:
         server_type: one of values ('sw', 'gbn', 'sr')
         threads_table: threads table structure depends on the type of server
             if 'sw'
-                threads_table element : NamedTuple(
+                threads_table element : SWEntry(
                     e: EventObject
                     pkt: newest packet received
                 )
@@ -54,9 +54,9 @@ class DemuxHandler:
             # create new thread for this client
             if self.server_type == 'sw':
                 print("CREATING NEW SERVER HANDLER")
-                th_entry = self._get_new_SW_thread_table_entry()
+                th_entry = self._get_new_SW_thread_table_entry(address)
                 self.threads_table[address] = th_entry
-                th = Thread(target=self._debug_dummy_server, args=[packet, th_entry], daemon=True)
+                th = Thread(target=DemuxHandler._debug_dummy_server, args=[packet, th_entry], daemon=True)
                 th.setName('SW Thread # {}'.format(active_count()))
                 th.start()
                 self._pass_packet(packet, address)
@@ -78,19 +78,23 @@ class DemuxHandler:
             shared_res.e.set()
             shared_res.pkt = packet
 
-    def _get_new_SW_thread_table_entry(self):
+    def _get_new_SW_thread_table_entry(self, address):
         """
         setup thread table entry for new SW server thread
         :return: NamedTuple()
         """
-        return SWEntry(e=Event(), pkt=None)
+        return SWEntry(e=Event(), pkt=None, client_address=address)
 
-    def _debug_dummy_server(self, packet, entry):
+    @staticmethod
+    def _debug_dummy_server(packet, entry):
         pkt_count = 0
         print("Server Thread running...")
+        S_SERVER = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        # S_SERVER.bind(('localhost', 6222))
         while True:
-            e, pkt = entry.get_tuple()
+            e, pkt, client_address = entry.get_tuple()
             e.wait()
             print("PACKET #{}, {}".format(pkt_count, packet))
+            S_SERVER.sendto(bytearray('Ack', encoding='utf-8'), client_address)
             pkt_count += 1
             e.clear()
