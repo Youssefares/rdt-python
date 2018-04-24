@@ -6,6 +6,7 @@ import sys
 from config import server_config
 from Packet import Packet
 from multiprocessing import Process
+from DemuxHandler import DemuxHandler
 
 # Constants
 CONFIG_FILE = "inputs/server.in"
@@ -35,11 +36,8 @@ def send_file(file_name, addr):
     S_SERVER.sendto(packet.bytes(), addr)
     print("Replied with packet #%i:" % i, packet.bytes(), "To client: ", addr)
 
-
-while True:
-  PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
-  FILE_NAME = PACKET[3:].decode('utf-8')
-  print("Filename requested by client: ", FILE_NAME, "Addr: ", ADDR)
-  P = Process(target=send_file, args=[FILE_NAME, ADDR])
-  P.start()
-  P.join()
+if __name__ == '__main__':
+    demux_handler = DemuxHandler('sw')
+    while True:
+      PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
+      demux_handler.demux_or_create(packet=PACKET, address=ADDR)
