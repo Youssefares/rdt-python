@@ -8,14 +8,14 @@ class Packet:
     """
     def __init__(self, seq_num=None, data=None, packet_bytes=None):
         if packet_bytes:
-            self.seq_num = packet_bytes[17]
-            self.length = packet_bytes[18]
-            self.data = packet_bytes[19:]
+            # Assumes 16 byte (32 hex digits) checksum as calculated by md5
+            check_sum = packet_bytes[:32].decode('utf-8')
+            self.seq_num = packet_bytes[32]
+            self.len = packet_bytes[33]
+            self.data = packet_bytes[34:].decode('utf-8')
 
-            check_sum = packet_bytes[:16].decode('utf-8')
             if check_sum != self.check_sum():
                 raise Exception("Packet corrupt: Checksum values don't match")
-
         else:
             if len(data) > 500:
                 raise Exception("Data should be less than 500 bytes")
@@ -31,7 +31,8 @@ class Packet:
 
     def bytes(self):
         """ return packet in form of bytes"""
-        return self.check_sum().encode('utf-8') + bytes([self.seq_num, self.len]) + self.data.encode('utf-8')
+        return self.check_sum().encode('utf-8') + bytes([self.seq_num, self.len])\
+        + self.data.encode('utf-8')
 
     def check_sum(self):
         """
@@ -45,10 +46,7 @@ class Packet:
         True
         """
         return md5(bytes([self.seq_num, self.len])+ self.data.encode('utf-8')).hexdigest()
-    
-    @staticmethod
-    def get_data_from_packet_bytes(pkt):
-        pass
+
 
 
 if __name__ == "__main__":
