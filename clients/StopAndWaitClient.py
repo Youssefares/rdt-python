@@ -17,11 +17,14 @@ S_CLIENT.bind(('localhost', CLIENT_PORT))
 def main_receive_loop(file_name):
     seq_number = 0
     buffer = []
+    # FIXME: this becomes ack at times
     pkt = PacketHelper.create_pkt_from_data(seq_number, file_name)
     while True:
         S_CLIENT.sendto(pkt, (SERVER_IP, SERVER_PORT))
         print("PACKET SEQ {} SENT...".format(seq_number))
+        # FIXME: 512 should be el buffer size exactly
         packet, address = S_CLIENT.recvfrom(512)
+        # Simulates network layer delay
         time.sleep(0.5)
         print("RECEIVED PACKET: ", packet)
         pkt_data = PacketHelper.get_data(packet)

@@ -75,7 +75,6 @@ class DemuxHandler:
             # Wait until the last event was handled
             # while shared_res.e.is_set():
             #     pass
-            print(shared_res.e)
             shared_res.e.set()
             shared_res.pkt = packet
 

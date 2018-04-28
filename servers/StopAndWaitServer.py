@@ -30,16 +30,22 @@ class StopAndWaitServer:
             # first check if seq number is correct else drop
             if parsed_pkt.seq_number is not self.seq:
                 # send last ack
-                S_SERVER.sendto(bytearray('Ack{}'.format((self.seq + 1) % 2),
-                                          encoding='utf-8'), self.client_entry.client_address)
+                S_SERVER.sendto(
+                    bytearray('Ack{}'.format((self.seq + 1) % 2), encoding='utf-8'),
+                    self.client_entry.client_address)
                 self.client_entry.e.clear()
                 continue
             # else check the packet type if data or acknowledgement
             if parsed_pkt.type == 'Ack':
                 self.seq = (self.seq + 1) % 2
-                if len(self.file_packets_queue):
-                    S_SERVER.sendto(PacketHelper.create_pkt_from_data(self.seq, self.file_packets_queue.popleft()),
-                                    self.client_entry.client_address)
+                if self.file_packets_queue:
+                    S_SERVER.sendto(
+                        PacketHelper.create_pkt_from_data(
+                            self.seq,
+                            self.file_packets_queue.popleft()
+                        ),
+                        self.client_entry.client_address
+                    )
                 else:
                     print("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
                     break
