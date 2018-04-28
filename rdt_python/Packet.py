@@ -16,8 +16,7 @@ class Packet:
 
     def bytes(self):
         """ return packet in form of bytes"""
-        return bytes([self.check_sum(), self.seq_num, self.len])\
-        +self.data.encode('utf-8')
+        return self.check_sum().encode('utf-8') + bytes([self.seq_num, self.len]) + self.data.encode('utf-8')
 
     def check_sum(self):
         """
@@ -31,6 +30,11 @@ class Packet:
         True
         """
         return md5(bytes([self.seq_num, self.len])+ self.data.encode('utf-8')).hexdigest()
+    
+    @staticmethod
+    def get_data_from_packet_bytes(pkt):
+        pass
+
 
 if __name__ == "__main__":
     import doctest
