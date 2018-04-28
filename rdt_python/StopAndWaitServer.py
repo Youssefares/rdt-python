@@ -1,4 +1,4 @@
-from rdt_python.helpers import PacketHelper
+from helpers import PacketHelper
 import socket
 from collections import deque
 

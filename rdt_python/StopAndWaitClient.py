@@ -3,7 +3,7 @@ from config import client_config
 from helpers import PacketHelper
 import time
 
-CONFIG_FILE = "../inputs/client.in"
+CONFIG_FILE = "inputs/client.in"
 PACKET_LEN = 50
 
 SERVER_IP, SERVER_PORT, CLIENT_PORT, FILE, RCV_WINDOW_SIZE = client_config(

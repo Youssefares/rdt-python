@@ -5,7 +5,7 @@ connections on top of a single UDP Connection
 
 from threading import Thread, Event, active_count
 import socket
-from servers import StopAndWaitServer
+import StopAndWaitServer
 
 class SWEntry:
     __slots__ = ['e', 'pkt', 'client_address']
