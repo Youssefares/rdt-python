@@ -6,13 +6,28 @@ class Packet:
     """
     data packet class
     """
-    def __init__(self, seq_num=None, data=None):
-        if len(data) > 500:
-            raise Exception("Data should be less than 500 bytes")
-        self.len = len(data)
-        self.seq_num = seq_num
-        self.data = data
+    def __init__(self, seq_num=None, data=None, packet_bytes=None):
+        if packet_bytes:
+            self.seq_num = packet_bytes[17]
+            self.length = packet_bytes[18]
+            self.data = packet_bytes[19:]
 
+            check_sum = packet_bytes[:16].decode('utf-8')
+            if check_sum != self.check_sum():
+                raise Exception("Packet corrupt: Checksum values don't match")
+
+        else:
+            if len(data) > 500:
+                raise Exception("Data should be less than 500 bytes")
+            self.len = len(data)
+            self.seq_num = seq_num
+            self.data = data
+
+    def __str__(self):
+        return str({self.seq_num: self.data})
+
+    def __repr__(self):
+        return str(self)
 
     def bytes(self):
         """ return packet in form of bytes"""
