@@ -1,6 +1,8 @@
 """This module provides packet class"""
 
 from hashlib import md5
+from math import floor
+import os
 
 class Packet:
     """
@@ -15,10 +17,10 @@ class Packet:
             self.data = packet_bytes[34:].decode('utf-8')
 
             if check_sum != self.check_sum():
-                raise Exception("Packet corrupt: Checksum values don't match")
+                raise ValueError("Packet corrupt: Checksum values don't match")
         else:
             if len(data) > 500:
-                raise Exception("Data should be less than 500 bytes")
+                raise ValueError("Data should be less than 500 bytes")
             self.len = len(data)
             self.seq_num = seq_num
             self.data = data
@@ -46,6 +48,31 @@ class Packet:
         True
         """
         return md5(bytes([self.seq_num, self.len])+ self.data.encode('utf-8')).hexdigest()
+
+    @staticmethod
+    def get_file_packets(file, packet_len, window_size):
+        root_dir = os.path.dirname(os.path.abspath(__file__))
+        print(file)
+        print(root_dir)
+        packet_chars = floor(packet_len / 8)
+        packets = []
+        with open('{}/{}'.format(root_dir, file), 'rb') as f:
+            # TODO: Memory will be violated if file is large enough
+            file = f.read()
+            i = 0
+            file_length = len(file)
+            seq_num = 0;
+            while i < len(file):
+                remaining_length = file_length - i
+                packets.append(Packet(seq_num=seq_num, data=file[i:i+min(packet_chars, remaining_length)]))
+                i += min(packet_chars, remaining_length)
+                seq_num = (seq_num + 1) % window_size
+
+            if len(packets[-1].data) < packet_chars:
+                packets[-1].data += bytes(chr(23), encoding='utf-8')
+            else:
+                packets.append(Packet(seq_num=seq_num, data=bytes(chr(23), encoding='utf-8')))
+        return packets
 
 
 

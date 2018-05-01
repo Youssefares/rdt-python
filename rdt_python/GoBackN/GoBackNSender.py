@@ -41,7 +41,7 @@ class GoBackNSender:
         sends packets in the window one by one to the client
         """
         for pkt in self.window():
-            self.socket.sendto(pkt, self.client_address)
+            self.socket.sendto(pkt.bytes(), self.client_address)
         self.next_seq_num += self.window_size
 
     def slide(self, last_acked_seq_num):
@@ -50,4 +50,4 @@ class GoBackNSender:
         """
         for i, pkt in enumerate(self.packets[self.send_base:]):
             if last_acked_seq_num == pkt.seq_num:
-                self.send_base += i
+                self.send_base = self.send_base + i + 1

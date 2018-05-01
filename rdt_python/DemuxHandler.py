@@ -5,7 +5,11 @@ connections on top of a single UDP Connection
 
 from threading import Thread, Event, active_count
 import socket
+from queue import Queue
+
 import StopAndWaitServer
+from GoBackN.GoBackNServer import GoBackNServer
+
 
 class SWEntry:
     __slots__ = ['e', 'pkt', 'client_address']
@@ -17,6 +21,17 @@ class SWEntry:
 
     def get_tuple(self):
         return self.e, self.pkt, self.client_address
+
+
+class GBNEntry:
+    __slots__ = ['queue', 'client_address']
+
+    def __init__(self, queue, client_address):
+        self.queue = queue
+        self.client_address = client_address
+    
+    def get_tuple(self):
+        return self.queue, self.client_address
 
 
 class DemuxHandler:
@@ -58,9 +73,16 @@ class DemuxHandler:
                 th_entry = self._get_new_SW_thread_table_entry(address)
                 self.threads_table[address] = th_entry
                 th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry], daemon=True)
-                th.setName('SW Thread # {}'.format(active_count()))
-                th.start()
-                self._pass_packet(packet, address)
+                th.setName('SW Thread # {}'.format(active_count()))    
+            
+            if self.server_type == 'gbn':
+                print("CREATING NEW GBN SERVER HANDLER")
+                th_entry = self._get_new_GBN_thread_table_entry(address)
+                self.threads_table[address] = th_entry
+                th = Thread(target=lambda client_entry: GoBackNServer(client_entry).start(), args=[th_entry], daemon=True)
+            
+            th.start()
+            self._pass_packet(packet, address)
 
     def _pass_packet(self, packet, address):
         """
@@ -77,6 +99,8 @@ class DemuxHandler:
             #     pass
             shared_res.e.set()
             shared_res.pkt = packet
+        elif self.server_type == 'gbn':
+            shared_res.queue.put(packet)
 
     def _get_new_SW_thread_table_entry(self, address):
         """
@@ -84,6 +108,9 @@ class DemuxHandler:
         :return: NamedTuple()
         """
         return SWEntry(e=Event(), pkt=None, client_address=address)
+
+    def _get_new_GBN_thread_table_entry(self, address):
+        return GBNEntry(queue=Queue(), client_address=address)
 
     @staticmethod
     def _debug_dummy_server(entry):
