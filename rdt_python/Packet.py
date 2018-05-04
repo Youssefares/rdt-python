@@ -10,13 +10,18 @@ class Packet:
     """
     data packet class
     """
+    PACKET_LENGTH = 80
     def __init__(self, seq_num=None, data=None, packet_bytes=None):
         if packet_bytes:
             # Assumes 16 byte (32 hex digits) checksum as calculated by md5
+            print("BYTES: ")
+            print(packet_bytes)
             check_sum = packet_bytes[:32].decode('utf-8')
             self.seq_num = packet_bytes[32]
             self.len = packet_bytes[33]
             self.data = packet_bytes[34:].decode('utf-8')
+            print("DATA: ")
+            print(len(self.data))
             if check_sum != self.check_sum():
                 raise ValueError("Packet corrupt: Checksum values don't match")
         else:
@@ -26,7 +31,8 @@ class Packet:
             self.seq_num = seq_num
             self.data = data
 
-        self.last_pkt = self.data[-1] == EOT_CHR if self.data else None
+        self.is_ack = len(self.data) == 0
+        self.is_last_pkt = self.data[-1] == EOT_CHR if not self.is_ack else None
 
     def __str__(self):
         return str({self.seq_num: self.data})

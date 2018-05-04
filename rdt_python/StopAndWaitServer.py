@@ -1,4 +1,4 @@
-from helpers import PacketHelper
+from Packet import Packet
 import socket
 from collections import deque
 
@@ -26,24 +26,17 @@ class StopAndWaitServer:
             # TODO handle timeout here
             self.client_entry.e.wait()
             print("RECEIVED PACKET: ", self.client_entry.pkt)
-            parsed_pkt = PacketHelper.get_data(self.client_entry.pkt)
+            parsed_pkt = Packet(packet_bytes=self.client_entry.pkt)
             # first check if seq number is correct else drop
-            if parsed_pkt.seq_number is not self.seq:
-                # send last ack
-                S_SERVER.sendto(
-                    bytearray('Ack{}'.format((self.seq + 1) % 2), encoding='utf-8'),
-                    self.client_entry.client_address)
+            if parsed_pkt.seq_num is not self.seq:
                 self.client_entry.e.clear()
                 continue
             # else check the packet type if data or acknowledgement
-            if parsed_pkt.type == 'Ack':
+            if parsed_pkt.is_ack:
                 self.seq = (self.seq + 1) % 2
                 if self.file_packets_queue:
                     S_SERVER.sendto(
-                        PacketHelper.create_pkt_from_data(
-                            self.seq,
-                            self.file_packets_queue.popleft()
-                        ),
+                        self.file_packets_queue.popleft().bytes(),
                         self.client_entry.client_address
                     )
                 else:
@@ -51,13 +44,18 @@ class StopAndWaitServer:
                     break
             else:
                 file_name = parsed_pkt.data
-                self.file_packets_queue = deque(PacketHelper.get_file_packets(file_name, PacketHelper.PACKET_LENGTH))
-                S_SERVER.sendto(PacketHelper.create_pkt_from_data(self.seq, self.file_packets_queue.popleft()),
-                                self.client_entry.client_address)
+                self.file_packets_queue = deque(
+                    Packet.get_file_packets(file_name, Packet.PACKET_LENGTH, 2)
+                )
+                S_SERVER.sendto(
+                    self.file_packets_queue.popleft().bytes(),
+                    self.client_entry.client_address
+                )
             self.client_entry.e.clear()
 
 
 def run_handler(entry):
+    """ runs handler """
     # TODO: refactor that the threads runs on __init__ if this function
     # proves not to be needed
     server = StopAndWaitServer(entry)

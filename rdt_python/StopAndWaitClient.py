@@ -1,7 +1,8 @@
 import socket
-from config import client_config
-from helpers import PacketHelper
 import time
+
+from config import client_config
+from Packet import Packet
 
 CONFIG_FILE = "inputs/client.in"
 PACKET_LEN = 50
@@ -18,28 +19,31 @@ def main_receive_loop(file_name):
     seq_number = 0
     buffer = []
     # FIXME: this becomes ack at times
-    pkt = PacketHelper.create_pkt_from_data(seq_number, file_name)
+    pkt = Packet(seq_num=seq_number, data=file_name)
     while True:
-        S_CLIENT.sendto(pkt, (SERVER_IP, SERVER_PORT))
+        S_CLIENT.sendto(pkt.bytes(), (SERVER_IP, SERVER_PORT))
         print("PACKET SEQ {} SENT...".format(seq_number))
         # FIXME: 512 should be el buffer size exactly
         packet, address = S_CLIENT.recvfrom(512)
         # Simulates network layer delay
         # time.sleep(0.5)
         print("RECEIVED PACKET: ", packet)
-        pkt_data = PacketHelper.get_data(packet)
-        if pkt_data.seq_number is not seq_number:
+
+        pkt_data = Packet(packet_bytes=packet)
+
+        if pkt_data.seq_num is not seq_number:
             # Last packet is not received
             continue
         # Acknowledge received packet
         buffer.append(pkt_data.data)
-        pkt = PacketHelper.create_pkt_from_data(seq_number, 'Ack{}'.format(seq_number))
+        pkt = Packet(seq_num=seq_number, data='')
         seq_number = (seq_number + 1) % 2
-        if pkt_data.last_pkt:
-            with open("outputs/sw_{}".format(file_name), 'w') as f:
-                f.write(buffer)
+        if pkt_data.is_last_pkt:
+            with open("received/{}".format(file_name.split('/')[-1]), 'w+') as f:
+                f.write(' '.join(buffer))
             print("FILE RECEIVED AND SAVED...")
+            break
 
 if __name__ == '__main__':
-    file_name = 'inputs/big_file.txt'
+    file_name = 'public/big_file.txt'
     main_receive_loop(file_name)
