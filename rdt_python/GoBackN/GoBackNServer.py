@@ -37,8 +37,8 @@ class GoBackNServer:
                 # while there's no acks in the queue or timeout for oldest unacked packet
                 ack_packet = Packet(packet_bytes=self.client_entry.queue.get(timeout=TIMEOUT_TIME))
                 # TODO: Handle the fact that this seq number may not be in the window
-                oldest_unacked = (ack_packet.seq_number + 1) % WINDOW_SIZE
-                sender.slide(ack_packet.seq_number)
+                oldest_unacked = (ack_packet.seq_num + 1) % WINDOW_SIZE
+                sender.slide(ack_packet.seq_num)
             except ValueError:
                 # this means that the ack is not valid so we ignore it
                 # TODO: change time out to handle this case

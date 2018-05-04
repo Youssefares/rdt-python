@@ -6,7 +6,7 @@ from math import floor
 PACKET_DATA = namedtuple("packet_data", ['data', 'seq_number', 'check_sum', 'length', 'type', 'last_pkt'])
 ACK_RE = re.compile(".*Ack\d+.*")
 DATA_RE = re.compile("b'(.*)'")
-LAST_RE = re.compile(".*(\x17)")
+EOT_CHR = chr(23)
 
 PACKET_LENGTH = 80
 
@@ -24,7 +24,7 @@ def get_data(pkt):
     :return namedtuple
     """
     data = DATA_RE.match(str(pkt[3:])).group(1)
-    last_pkt = LAST_RE.match(data) is not None
+    last_pkt = data[-1] == '\x17'
     print(str(data[-4:]), last_pkt)
     return PACKET_DATA(data=data, seq_number=pkt[1], check_sum=pkt[0], length=pkt[2],
                        type='Ack' if ACK_RE.match(data) else 'Data', last_pkt=last_pkt)
@@ -45,8 +45,9 @@ def get_file_packets(file, packet_len):
             packets.append(file[i:i+min(packet_chars, remaining_length)])
             i += min(packet_chars, remaining_length)
 
+        # 
         if len(packets[-1]) < packet_chars:
-            packets[-1] += bytes(chr(23), encoding='utf-8')
+            packets[-1] += EOT_CHR
         else:
-            packets.append(bytes(chr(23), encoding='utf-8'))
+            packets.append(EOT_CHR)
     return packets

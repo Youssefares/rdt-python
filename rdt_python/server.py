@@ -37,7 +37,8 @@ def send_file(file_name, addr):
     print("Replied with packet #%i:" % i, packet.bytes(), "To client: ", addr)
 
 if __name__ == '__main__':
-    demux_handler = DemuxHandler('gbn')
+    #TODO: make server_type argument
+    demux_handler = DemuxHandler('sw')
     while True:
       PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
       demux_handler.demux_or_create(packet=PACKET, address=ADDR)

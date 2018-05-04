@@ -30,7 +30,7 @@ def main_receive_loop(file_name):
         # time.sleep(0.5)
         print("RECEIVED PACKET: ", packet)
         pkt_data = Packet(packet_bytes=packet)
-        if pkt_data.seq_number is not seq_number:
+        if pkt_data.seq_num is not seq_number:
             # Last packet is not received
             continue
         # Acknowledge received packet
