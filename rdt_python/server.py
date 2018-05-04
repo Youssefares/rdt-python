@@ -3,6 +3,7 @@
 # Imports
 import socket
 import sys
+import logging
 from config import server_config
 from Packet import Packet
 from multiprocessing import Process
@@ -37,7 +38,9 @@ def send_file(file_name, addr):
     print("Replied with packet #%i:" % i, packet.bytes(), "To client: ", addr)
 
 if __name__ == '__main__':
-    demux_handler = DemuxHandler('gbn')
-    while True:
-      PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
-      demux_handler.demux_or_create(packet=PACKET, address=ADDR)
+  logging.getLogger('gbn_server').addHandler(logging.StreamHandler())
+  #TODO: make server_type argument
+  demux_handler = DemuxHandler('gbn')
+  while True:
+    PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
+    demux_handler.demux_or_create(packet=PACKET, address=ADDR)

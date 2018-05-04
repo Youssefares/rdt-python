@@ -4,6 +4,8 @@ from hashlib import md5
 from math import floor
 import os
 
+EOT_CHR = chr(23)
+
 class Packet:
     """
     data packet class
@@ -15,7 +17,6 @@ class Packet:
             self.seq_num = packet_bytes[32]
             self.len = packet_bytes[33]
             self.data = packet_bytes[34:].decode('utf-8')
-
             if check_sum != self.check_sum():
                 raise ValueError("Packet corrupt: Checksum values don't match")
         else:
@@ -24,6 +25,8 @@ class Packet:
             self.len = len(data)
             self.seq_num = seq_num
             self.data = data
+
+        self.last_pkt = self.data[-1] == EOT_CHR if self.data else None
 
     def __str__(self):
         return str({self.seq_num: self.data})
@@ -49,6 +52,7 @@ class Packet:
         """
         return md5(bytes([self.seq_num, self.len])+ self.data.encode('utf-8')).hexdigest()
 
+
     @staticmethod
     def get_file_packets(file, packet_len, window_size):
         root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -56,22 +60,24 @@ class Packet:
         print(root_dir)
         packet_chars = floor(packet_len / 8)
         packets = []
-        with open('{}/{}'.format(root_dir, file), 'rb') as f:
+        with open('{}/{}'.format(root_dir, file), 'r') as f:
             # TODO: Memory will be violated if file is large enough
             file = f.read()
             i = 0
             file_length = len(file)
-            seq_num = 0;
+            seq_num = 0
             while i < len(file):
                 remaining_length = file_length - i
                 packets.append(Packet(seq_num=seq_num, data=file[i:i+min(packet_chars, remaining_length)]))
                 i += min(packet_chars, remaining_length)
-                seq_num = (seq_num + 1) % window_size
+                seq_num = (seq_num + 1) % ( 2* window_size)
 
             if len(packets[-1].data) < packet_chars:
-                packets[-1].data += bytes(chr(23), encoding='utf-8')
+                print(packets[-1].data)
+                packets[-1].data += EOT_CHR
             else:
-                packets.append(Packet(seq_num=seq_num, data=bytes(chr(23), encoding='utf-8')))
+                packets.append(Packet(seq_num=seq_num, data=EOT_CHR))
+        print(packets)
         return packets
 
 

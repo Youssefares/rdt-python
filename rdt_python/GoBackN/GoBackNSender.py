@@ -1,5 +1,13 @@
 """Module containing Sender for GoBackNserver"""
 import socket
+import logging
+
+
+def log_when_called(fn):
+    def new_fn(*args, **kargs):
+        print("Function Called")
+        fn(*args, **kargs)
+    return new_fn
 
 class GoBackNSender:
     """Sender for GoBackNserver"""
@@ -10,6 +18,8 @@ class GoBackNSender:
         self.next_seq_num = 1
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.client_address = client_address
+        self.logger = logging.getLogger('gbn_sender')
+        self.logger.addHandler(logging.StreamHandler())
 
     def window(self):
         """
@@ -36,12 +46,14 @@ class GoBackNSender:
         """
         return self.packets[self.next_seq_num:]
 
+    @log_when_called
     def send_packets_in_window(self):
         """
         sends packets in the window one by one to the client
         """
         for pkt in self.window():
             self.socket.sendto(pkt.bytes(), self.client_address)
+            print("Packet {} sent".format(pkt))
         self.next_seq_num += self.window_size
 
     def slide(self, last_acked_seq_num):

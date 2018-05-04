@@ -4,6 +4,7 @@ import time
 from config import client_config
 from helpers import PacketHelper
 from Packet import Packet
+from GoBackN.GoBackNClient import GoBackNClient
 
 CONFIG_FILE = "inputs/client.in"
 PACKET_LEN = 50
@@ -30,7 +31,7 @@ def main_receive_loop(file_name):
         # time.sleep(0.5)
         print("RECEIVED PACKET: ", packet)
         pkt_data = Packet(packet_bytes=packet)
-        if pkt_data.seq_number is not seq_number:
+        if pkt_data.seq_num is not seq_number:
             # Last packet is not received
             continue
         # Acknowledge received packet
@@ -44,4 +45,7 @@ def main_receive_loop(file_name):
 
 if __name__ == '__main__':
     file_name = 'public/big_file.txt'
-    main_receive_loop(file_name)
+    client = GoBackNClient(('localhost', 5757))
+    client.request_file(('localhost', SERVER_PORT), file_name)
+    # main_receive_loop(file_name)
+
