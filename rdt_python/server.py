@@ -22,6 +22,11 @@ PACKET_LEN = 500
 # Logger configs
 logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)

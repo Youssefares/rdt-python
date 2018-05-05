@@ -6,25 +6,33 @@ import sys
 from .GoBackNSender import GoBackNSender
 from Packet import Packet
 
-WINDOW_SIZE = 50
+WINDOW_SIZE = 10
 TIMEOUT_TIME = 1
 PACKET_LENGTH = 80*8
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
 LOGGER.addHandler(TERIMAL_HANDLER)
 
 
+
 class GoBackNServer:
     """
     Main entry point for GoBackN Server
     """
-    def __init__(self, client_entry):
+    def __init__(self, client_entry, probabilty, seed_num):
         # self.sender = GoBackNSender(packets, WINDOW_SIZE, client_entry.address)
         self.client_entry = client_entry
+        self.probabilty = probabilty
+        self.seed_num = seed_num
     
     def start(self):
         """
@@ -36,7 +44,7 @@ class GoBackNServer:
         LOGGER.info('Recieved Request for file: {}'.format(file_name))
         packets = Packet.get_file_packets(file_name, PACKET_LENGTH, WINDOW_SIZE)
 
-        sender = GoBackNSender(packets, WINDOW_SIZE, self.client_entry.client_address)
+        sender = GoBackNSender(packets, WINDOW_SIZE, self.client_entry.client_address, self.probabilty, self.seed_num)
 
         oldest_unacked = 0
         # request sender to send window to client

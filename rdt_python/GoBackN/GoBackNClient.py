@@ -6,7 +6,7 @@ import logging
 
 from Packet import Packet
 
-WINDOW_SIZE = 50
+WINDOW_SIZE = 10
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)

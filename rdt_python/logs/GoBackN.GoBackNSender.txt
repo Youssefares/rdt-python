@@ -1,0 +1,1312 @@
+Sending Packets in Window
+Packet {0: 'I take the'} sent
+Packet 1 is lost
+Packet {2: 'ame I take'} sent
+Packet {3: ' thee by t'} sent
+Window Slide Called
+Packet {4: 'hy name I '} sent
+New Send Base: 1 with seq 1
+Packet {5: 'take thee '} sent
+Packet 6 is lost
+Packet {7: 'e\x17'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {1: 'e by thy n'} sent
+Packet 2 is lost
+Packet {3: ' thee by t'} sent
+Packet 4 is lost
+Packet {5: 'take thee '} sent
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 2 with seq 2
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 2 is lost
+Packet {3: ' thee by t'} sent
+Packet 4 is lost
+Packet {5: 'take thee '} sent
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {2: 'ame I take'} sent
+Packet 3 is lost
+Packet {4: 'hy name I '} sent
+Packet {5: 'take thee '} sent
+Window Slide Called
+Packet {6: 'by thy nam'} sent
+New Send Base: 3 with seq 3
+Packet 7 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {3: ' thee by t'} sent
+Packet 4 is lost
+Packet {5: 'take thee '} sent
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 4 with seq 4
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 4 is lost
+Packet 5 is lost
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {4: 'hy name I '} sent
+Packet {5: 'take thee '} sent
+Packet 6 is lost
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 5 with seq 5
+Window Slide Called
+New Send Base: 6 with seq 6
+Window Slide Called
+Sending Packets in Window
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 7 with seq 7
+Window Slide Called
+Sending Packets in Window
+Sending Packets in Window
+Packet {0: 'I take the'} sent
+Packet 1 is lost
+Packet {2: 'ame I take'} sent
+Packet {3: ' thee by t'} sent
+Packet {4: 'hy name I '} sent
+Window Slide Called
+New Send Base: 1 with seq 1
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {1: 'e by thy n'} sent
+Packet 2 is lost
+Packet {3: ' thee by t'} sent
+Window Slide Called
+New Send Base: 2 with seq 2
+Packet {4: 'hy name I '} sent
+Packet 5 is lost
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {2: 'ame I take'} sent
+Packet 3 is lost
+Packet {4: 'hy name I '} sent
+Window Slide Called
+New Send Base: 3 with seq 3
+Packet {5: 'take thee '} sent
+Packet {6: 'by thy nam'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 3 is lost
+Packet {4: 'hy name I '} sent
+Packet 5 is lost
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {3: ' thee by t'} sent
+Packet {4: 'hy name I '} sent
+Packet 5 is lost
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 4 with seq 4
+Window Slide Called
+New Send Base: 5 with seq 5
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {5: 'take thee '} sent
+Packet 6 is lost
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 6 with seq 6
+Window Slide Called
+Sending Packets in Window
+Packet 6 is lost
+Packet {7: 'e\x17'} sent
+Window Slide Called
+Sending Packets in Window
+Packet {6: 'by thy nam'} sent
+Packet {7: 'e\x17'} sent
+Window Slide Called
+New Send Base: 7 with seq 7
+Window Slide Called
+Sending Packets in Window
+Sending Packets in Window
+Packet {0: 'The Projec'} sent
+Packet 1 is lost
+Packet {2: 'g EBook of'} sent
+Packet {3: ' The Adven'} sent
+Packet {4: 'tures of S'} sent
+Window Slide Called
+New Send Base: 1 with seq 1
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {1: 't Gutenber'} sent
+Packet 2 is lost
+Packet {3: ' The Adven'} sent
+Packet {4: 'tures of S'} sent
+Packet 5 is lost
+Window Slide Called
+New Send Base: 2 with seq 2
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {2: 'g EBook of'} sent
+Packet 3 is lost
+Packet {4: 'tures of S'} sent
+Packet {5: 'herlock Ho'} sent
+Packet {6: 'lmes\nby Si'} sent
+Window Slide Called
+New Send Base: 3 with seq 3
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 3 is lost
+Packet {4: 'tures of S'} sent
+Packet 5 is lost
+Packet {6: 'lmes\nby Si'} sent
+Packet {7: 'r Arthur C'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {3: ' The Adven'} sent
+Packet {4: 'tures of S'} sent
+Packet 5 is lost
+Packet {6: 'lmes\nby Si'} sent
+Packet {7: 'r Arthur C'} sent
+Sending Packets in Window
+Packet {0: 'The Project Gutenberg EBook of The Adventures of Sherlock Holmes\nby Sir Arthur C'} sent
+Packet 1 is lost
+Packet {2: 'nging all over the world. Be sure to check the\ncopyright laws for your country b'} sent
+Packet {3: 'efore downloading or redistributing\nthis or any other Project Gutenberg eBook.\n\n'} sent
+Packet {4: 'This header should be the first thing seen when viewing this Project\nGutenberg f'} sent
+Packet {5: 'ile.  Please do not remove it.  Do not change or edit the\nheader without written'} sent
+Packet 6 is lost
+Packet {7: 'he\neBook and Project Gutenberg at the bottom of this file.  Included is\nimportan'} sent
+Window Slide Called
+Packet {8: 't information about your specific rights and restrictions in\nhow the file may be'} sent
+Packet 9 is lost
+New Send Base: 1 with seq 1
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {1: 'onan Doyle\n(#15 in our series by Sir Arthur Conan Doyle)\n\nCopyright laws are cha'} sent
+Packet 2 is lost
+Packet {3: 'efore downloading or redistributing\nthis or any other Project Gutenberg eBook.\n\n'} sent
+Packet {4: 'This header should be the first thing seen when viewing this Project\nGutenberg f'} sent
+Packet {5: 'ile.  Please do not remove it.  Do not change or edit the\nheader without written'} sent
+Window Slide Called
+Packet 6 is lost
+Packet {7: 'he\neBook and Project Gutenberg at the bottom of this file.  Included is\nimportan'} sent
+New Send Base: 2 with seq 2
+Packet 8 is lost
+Packet {9: ' used.  You can also find out about how to make a\ndonation to Project Gutenberg,'} sent
+Packet {10: ' and how to get involved.\n\n\n**Welcome To The World of Free Plain Vanilla Electro'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {2: 'nging all over the world. Be sure to check the\ncopyright laws for your country b'} sent
+Packet {3: 'efore downloading or redistributing\nthis or any other Project Gutenberg eBook.\n\n'} sent
+Packet 4 is lost
+Packet {5: 'ile.  Please do not remove it.  Do not change or edit the\nheader without written'} sent
+Packet {6: ' permission.\n\nPlease read the "legal small print," and other information about t'} sent
+Packet {7: 'he\neBook and Project Gutenberg at the bottom of this file.  Included is\nimportan'} sent
+Packet 8 is lost
+Window Slide Called
+Packet {9: ' used.  You can also find out about how to make a\ndonation to Project Gutenberg,'} sent
+New Send Base: 3 with seq 3
+Packet 10 is lost
+Packet {11: 'nic Texts**\n\n**eBooks Readable By Both Humans and By Computers, Since 1971**\n\n**'} sent
+Window Slide Called
+New Send Base: 4 with seq 4
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {4: 'This header should be the first thing seen when viewing this Project\nGutenberg f'} sent
+Packet {5: 'ile.  Please do not remove it.  Do not change or edit the\nheader without written'} sent
+Packet 6 is lost
+Packet 7 is lost
+Packet {8: 't information about your specific rights and restrictions in\nhow the file may be'} sent
+Packet {9: ' used.  You can also find out about how to make a\ndonation to Project Gutenberg,'} sent
+Window Slide Called
+Packet {10: ' and how to get involved.\n\n\n**Welcome To The World of Free Plain Vanilla Electro'} sent
+New Send Base: 5 with seq 5
+Packet {11: 'nic Texts**\n\n**eBooks Readable By Both Humans and By Computers, Since 1971**\n\n**'} sent
+Packet 12 is lost
+Window Slide Called
+Packet {13: 'ntures of Sherlock Holmes\n\nAuthor: Sir Arthur Conan Doyle\n\nRelease Date: March, '} sent
+New Send Base: 6 with seq 6
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {6: ' permission.\n\nPlease read the "legal small print," and other information about t'} sent
+Packet {7: 'he\neBook and Project Gutenberg at the bottom of this file.  Included is\nimportan'} sent
+Packet {8: 't information about your specific rights and restrictions in\nhow the file may be'} sent
+Packet 9 is lost
+Packet {10: ' and how to get involved.\n\n\n**Welcome To The World of Free Plain Vanilla Electro'} sent
+Packet 11 is lost
+Packet {12: '***These eBooks Were Prepared By Thousands of Volunteers!*****\n\n\nTitle: The Adve'} sent
+Window Slide Called
+Packet 13 is lost
+New Send Base: 7 with seq 7
+Packet {14: '1999  [EBook #1661]\n[Most recently updated: November 29, 2002]\n\nEdition: 12\n\nLan'} sent
+Packet {15: 'guage: English\n\nCharacter set encoding: ASCII\n\n*** START OF THE PROJECT GUTENBER'} sent
+Window Slide Called
+New Send Base: 8 with seq 8
+Window Slide Called
+New Send Base: 9 with seq 9
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {9: ' used.  You can also find out about how to make a\ndonation to Project Gutenberg,'} sent
+Packet {10: ' and how to get involved.\n\n\n**Welcome To The World of Free Plain Vanilla Electro'} sent
+Packet {11: 'nic Texts**\n\n**eBooks Readable By Both Humans and By Computers, Since 1971**\n\n**'} sent
+Packet 12 is lost
+Packet {13: 'ntures of Sherlock Holmes\n\nAuthor: Sir Arthur Conan Doyle\n\nRelease Date: March, '} sent
+Packet 14 is lost
+Packet {15: 'guage: English\n\nCharacter set encoding: ASCII\n\n*** START OF THE PROJECT GUTENBER'} sent
+Packet 16 is lost
+Packet {17: 'enendez)\n\n\n\nTHE ADVENTURES OF\nSHERLOCK HOLMES\n\nBY\n\nSIR ARTHUR CONAN DOYLE\n\nCONTE'} sent
+Window Slide Called
+Packet {18: 'NTS\n\nI.\tA Scandal in Bohemia\nII.\tThe Red-Headed League\nIII.\tA Case of Identity\nI'} sent
+New Send Base: 10 with seq 10
+Window Slide Called
+New Send Base: 11 with seq 11
+Window Slide Called
+New Send Base: 12 with seq 12
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 12 is lost
+Packet {13: 'ntures of Sherlock Holmes\n\nAuthor: Sir Arthur Conan Doyle\n\nRelease Date: March, '} sent
+Packet 14 is lost
+Packet {15: 'guage: English\n\nCharacter set encoding: ASCII\n\n*** START OF THE PROJECT GUTENBER'} sent
+Packet {16: 'G EBOOK, THE ADVENTURES OF SHERLOCK HOLMES ***\n\n\n\n\n(Additional editing by Jose M'} sent
+Packet {17: 'enendez)\n\n\n\nTHE ADVENTURES OF\nSHERLOCK HOLMES\n\nBY\n\nSIR ARTHUR CONAN DOYLE\n\nCONTE'} sent
+Packet {18: 'NTS\n\nI.\tA Scandal in Bohemia\nII.\tThe Red-Headed League\nIII.\tA Case of Identity\nI'} sent
+Packet 19 is lost
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Packet {1: "kled Band\nIX.\tThe Adventure of the Engineer's Thumb\nX.\tThe Adventure of the Nobl"} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {12: '***These eBooks Were Prepared By Thousands of Volunteers!*****\n\n\nTitle: The Adve'} sent
+Packet {13: 'ntures of Sherlock Holmes\n\nAuthor: Sir Arthur Conan Doyle\n\nRelease Date: March, '} sent
+Packet 14 is lost
+Packet {15: 'guage: English\n\nCharacter set encoding: ASCII\n\n*** START OF THE PROJECT GUTENBER'} sent
+Packet {16: 'G EBOOK, THE ADVENTURES OF SHERLOCK HOLMES ***\n\n\n\n\n(Additional editing by Jose M'} sent
+Packet {17: 'enendez)\n\n\n\nTHE ADVENTURES OF\nSHERLOCK HOLMES\n\nBY\n\nSIR ARTHUR CONAN DOYLE\n\nCONTE'} sent
+Window Slide Called
+Packet 18 is lost
+New Send Base: 13 with seq 13
+Packet 19 is lost
+Window Slide Called
+New Send Base: 14 with seq 14
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Window Slide Called
+Packet {1: "kled Band\nIX.\tThe Adventure of the Engineer's Thumb\nX.\tThe Adventure of the Nobl"} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 14 is lost
+Packet {15: 'guage: English\n\nCharacter set encoding: ASCII\n\n*** START OF THE PROJECT GUTENBER'} sent
+Packet {16: 'G EBOOK, THE ADVENTURES OF SHERLOCK HOLMES ***\n\n\n\n\n(Additional editing by Jose M'} sent
+Packet 17 is lost
+Packet {18: 'NTS\n\nI.\tA Scandal in Bohemia\nII.\tThe Red-Headed League\nIII.\tA Case of Identity\nI'} sent
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Packet 1 is lost
+Packet {2: 'e Bachelor\nXI.\tThe Adventure of the Beryl Coronet\nXII.\tThe Adventure of the Copp'} sent
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {14: '1999  [EBook #1661]\n[Most recently updated: November 29, 2002]\n\nEdition: 12\n\nLan'} sent
+Packet {15: 'guage: English\n\nCharacter set encoding: ASCII\n\n*** START OF THE PROJECT GUTENBER'} sent
+Packet 16 is lost
+Packet 17 is lost
+Packet {18: 'NTS\n\nI.\tA Scandal in Bohemia\nII.\tThe Red-Headed League\nIII.\tA Case of Identity\nI'} sent
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Window Slide Called
+Packet {1: "kled Band\nIX.\tThe Adventure of the Engineer's Thumb\nX.\tThe Adventure of the Nobl"} sent
+New Send Base: 15 with seq 15
+Packet 2 is lost
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Window Slide Called
+New Send Base: 16 with seq 16
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {16: 'G EBOOK, THE ADVENTURES OF SHERLOCK HOLMES ***\n\n\n\n\n(Additional editing by Jose M'} sent
+Packet 17 is lost
+Packet 18 is lost
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Packet 0 is lost
+Packet {1: "kled Band\nIX.\tThe Adventure of the Engineer's Thumb\nX.\tThe Adventure of the Nobl"} sent
+Window Slide Called
+Packet {2: 'e Bachelor\nXI.\tThe Adventure of the Beryl Coronet\nXII.\tThe Adventure of the Copp'} sent
+New Send Base: 17 with seq 17
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Packet {4: ' always the woman. I have seldom heard him mention her under any other name. In '} sent
+Window Slide Called
+Packet {5: 'his eyes she eclipses and predominates the whole of her sex. It was not that he '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 17 is lost
+Packet 18 is lost
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Packet 1 is lost
+Packet {2: 'e Bachelor\nXI.\tThe Adventure of the Beryl Coronet\nXII.\tThe Adventure of the Copp'} sent
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Packet {4: ' always the woman. I have seldom heard him mention her under any other name. In '} sent
+Packet {5: 'his eyes she eclipses and predominates the whole of her sex. It was not that he '} sent
+Packet {6: 'felt any emotion akin to love for Irene Adler. All emotions, and that one partic'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 17 is lost
+Packet {18: 'NTS\n\nI.\tA Scandal in Bohemia\nII.\tThe Red-Headed League\nIII.\tA Case of Identity\nI'} sent
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Packet 1 is lost
+Packet 2 is lost
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Packet {4: ' always the woman. I have seldom heard him mention her under any other name. In '} sent
+Packet {5: 'his eyes she eclipses and predominates the whole of her sex. It was not that he '} sent
+Packet {6: 'felt any emotion akin to love for Irene Adler. All emotions, and that one partic'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {17: 'enendez)\n\n\n\nTHE ADVENTURES OF\nSHERLOCK HOLMES\n\nBY\n\nSIR ARTHUR CONAN DOYLE\n\nCONTE'} sent
+Packet 18 is lost
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Window Slide Called
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+New Send Base: 18 with seq 18
+Packet 1 is lost
+Packet {2: 'e Bachelor\nXI.\tThe Adventure of the Beryl Coronet\nXII.\tThe Adventure of the Copp'} sent
+Window Slide Called
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Packet {4: ' always the woman. I have seldom heard him mention her under any other name. In '} sent
+Window Slide Called
+Packet 5 is lost
+Packet {6: 'felt any emotion akin to love for Irene Adler. All emotions, and that one partic'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {18: 'NTS\n\nI.\tA Scandal in Bohemia\nII.\tThe Red-Headed League\nIII.\tA Case of Identity\nI'} sent
+Packet {19: 'V.\tThe Boscombe Valley Mystery\nV.\tThe Five Orange Pips\nVI.\tThe Man with the Twis'} sent
+Packet {0: 'ted Lip\nVII.\tThe Adventure of the Blue Carbuncle\nVIII.\tThe Adventure of the Spec'} sent
+Packet 1 is lost
+Packet 2 is lost
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Packet 4 is lost
+Packet {5: 'his eyes she eclipses and predominates the whole of her sex. It was not that he '} sent
+Packet {6: 'felt any emotion akin to love for Irene Adler. All emotions, and that one partic'} sent
+Window Slide Called
+Packet {7: 'ularly, were abhorrent to his cold, precise but admirably balanced mind. He was,'} sent
+New Send Base: 19 with seq 19
+Window Slide Called
+New Send Base: 20 with seq 0
+Window Slide Called
+New Send Base: 21 with seq 1
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {1: "kled Band\nIX.\tThe Adventure of the Engineer's Thumb\nX.\tThe Adventure of the Nobl"} sent
+Packet {2: 'e Bachelor\nXI.\tThe Adventure of the Beryl Coronet\nXII.\tThe Adventure of the Copp'} sent
+Packet {3: 'er Beeches\n\n\nADVENTURE  I.  A SCANDAL IN BOHEMIA\n\nI.\n\n\nTo Sherlock Holmes she is'} sent
+Packet 4 is lost
+Packet {5: 'his eyes she eclipses and predominates the whole of her sex. It was not that he '} sent
+Window Slide Called
+Packet 6 is lost
+New Send Base: 22 with seq 2
+Packet {7: 'ularly, were abhorrent to his cold, precise but admirably balanced mind. He was,'} sent
+Packet {8: ' I take it, the most perfect reasoning and observing machine that the world has '} sent
+Packet 9 is lost
+Window Slide Called
+Packet {10: 'spoke of the softer passions, save with a gibe and a sneer. They were admirable '} sent
+New Send Base: 23 with seq 3
+Window Slide Called
+New Send Base: 24 with seq 4
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {4: ' always the woman. I have seldom heard him mention her under any other name. In '} sent
+Packet 5 is lost
+Packet {6: 'felt any emotion akin to love for Irene Adler. All emotions, and that one partic'} sent
+Packet {7: 'ularly, were abhorrent to his cold, precise but admirably balanced mind. He was,'} sent
+Packet {8: ' I take it, the most perfect reasoning and observing machine that the world has '} sent
+Packet 9 is lost
+Packet {10: 'spoke of the softer passions, save with a gibe and a sneer. They were admirable '} sent
+Window Slide Called
+Packet 11 is lost
+New Send Base: 25 with seq 5
+Packet {12: 'ctions. But for the trained reasoner to admit such intrusions into his own delic'} sent
+Packet {13: 'ate and finely adjusted temperament was to introduce a distracting factor which '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {5: 'his eyes she eclipses and predominates the whole of her sex. It was not that he '} sent
+Packet {6: 'felt any emotion akin to love for Irene Adler. All emotions, and that one partic'} sent
+Packet {7: 'ularly, were abhorrent to his cold, precise but admirably balanced mind. He was,'} sent
+Packet {8: ' I take it, the most perfect reasoning and observing machine that the world has '} sent
+Packet 9 is lost
+Packet {10: 'spoke of the softer passions, save with a gibe and a sneer. They were admirable '} sent
+Packet 11 is lost
+Packet 12 is lost
+Packet {13: 'ate and finely adjusted temperament was to introduce a distracting factor which '} sent
+Packet {14: 'might throw a doubt upon all his mental results. Grit in a sensitive instrument,'} sent
+Window Slide Called
+New Send Base: 26 with seq 6
+Window Slide Called
+New Send Base: 27 with seq 7
+Window Slide Called
+New Send Base: 28 with seq 8
+Window Slide Called
+New Send Base: 29 with seq 9
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {9: 'seen, but as a lover he would have placed himself in a false position. He never '} sent
+Packet {10: 'spoke of the softer passions, save with a gibe and a sneer. They were admirable '} sent
+Packet {11: "things for the observer--excellent for drawing the veil from men's motives and a"} sent
+Packet {12: 'ctions. But for the trained reasoner to admit such intrusions into his own delic'} sent
+Packet 13 is lost
+Packet 14 is lost
+Packet {15: ' or a crack in one of his own high-power lenses, would not be more disturbing th'} sent
+Packet 16 is lost
+Packet {17: 'him, and that woman was the late Irene Adler, of dubious and questionable memory'} sent
+Packet {18: '.\n\nI had seen little of Holmes lately. My marriage had drifted us away from each'} sent
+Window Slide Called
+New Send Base: 30 with seq 10
+Window Slide Called
+New Send Base: 31 with seq 11
+Window Slide Called
+New Send Base: 32 with seq 12
+Window Slide Called
+New Send Base: 33 with seq 13
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 13 is lost
+Packet {14: 'might throw a doubt upon all his mental results. Grit in a sensitive instrument,'} sent
+Packet {15: ' or a crack in one of his own high-power lenses, would not be more disturbing th'} sent
+Packet {16: 'an a strong emotion in a nature such as his. And yet there was but one woman to '} sent
+Packet {17: 'him, and that woman was the late Irene Adler, of dubious and questionable memory'} sent
+Packet 18 is lost
+Packet {19: ' other. My own complete happiness, and the home-centred interests which rise up '} sent
+Packet 0 is lost
+Packet {1: 'ficient to absorb all my attention, while Holmes, who loathed every form of soci'} sent
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 13 is lost
+Packet {14: 'might throw a doubt upon all his mental results. Grit in a sensitive instrument,'} sent
+Packet 15 is lost
+Packet {16: 'an a strong emotion in a nature such as his. And yet there was but one woman to '} sent
+Packet {17: 'him, and that woman was the late Irene Adler, of dubious and questionable memory'} sent
+Packet {18: '.\n\nI had seen little of Holmes lately. My marriage had drifted us away from each'} sent
+Packet {19: ' other. My own complete happiness, and the home-centred interests which rise up '} sent
+Packet 0 is lost
+Packet {1: 'ficient to absorb all my attention, while Holmes, who loathed every form of soci'} sent
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {13: 'ate and finely adjusted temperament was to introduce a distracting factor which '} sent
+Packet 14 is lost
+Packet {15: ' or a crack in one of his own high-power lenses, would not be more disturbing th'} sent
+Packet 16 is lost
+Packet 17 is lost
+Window Slide Called
+New Send Base: 34 with seq 14
+Packet {18: '.\n\nI had seen little of Holmes lately. My marriage had drifted us away from each'} sent
+Packet {19: ' other. My own complete happiness, and the home-centred interests which rise up '} sent
+Packet {0: 'around the man who first finds himself master of his own establishment, were suf'} sent
+Window Slide Called
+Packet {1: 'ficient to absorb all my attention, while Holmes, who loathed every form of soci'} sent
+Window Slide Called
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 14 is lost
+Packet {15: ' or a crack in one of his own high-power lenses, would not be more disturbing th'} sent
+Packet 16 is lost
+Packet {17: 'him, and that woman was the late Irene Adler, of dubious and questionable memory'} sent
+Packet {18: '.\n\nI had seen little of Holmes lately. My marriage had drifted us away from each'} sent
+Packet 19 is lost
+Packet {0: 'around the man who first finds himself master of his own establishment, were suf'} sent
+Packet {1: 'ficient to absorb all my attention, while Holmes, who loathed every form of soci'} sent
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Packet {3: 'ed among his old books, and alternating from week to week between cocaine and am'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {14: 'might throw a doubt upon all his mental results. Grit in a sensitive instrument,'} sent
+Packet {15: ' or a crack in one of his own high-power lenses, would not be more disturbing th'} sent
+Window Slide Called
+Packet 16 is lost
+New Send Base: 35 with seq 15
+Packet 17 is lost
+Packet {18: '.\n\nI had seen little of Holmes lately. My marriage had drifted us away from each'} sent
+Window Slide Called
+New Send Base: 36 with seq 16
+Packet 19 is lost
+Packet {0: 'around the man who first finds himself master of his own establishment, were suf'} sent
+Packet {1: 'ficient to absorb all my attention, while Holmes, who loathed every form of soci'} sent
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Packet {3: 'ed among his old books, and alternating from week to week between cocaine and am'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {16: 'an a strong emotion in a nature such as his. And yet there was but one woman to '} sent
+Packet {17: 'him, and that woman was the late Irene Adler, of dubious and questionable memory'} sent
+Packet {18: '.\n\nI had seen little of Holmes lately. My marriage had drifted us away from each'} sent
+Packet {19: ' other. My own complete happiness, and the home-centred interests which rise up '} sent
+Packet 0 is lost
+Packet 1 is lost
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Packet {3: 'ed among his old books, and alternating from week to week between cocaine and am'} sent
+Packet {4: 'bition, the drowsiness of the drug, and the fierce energy of his own keen nature'} sent
+Packet 5 is lost
+Window Slide Called
+New Send Base: 37 with seq 17
+Window Slide Called
+New Send Base: 38 with seq 18
+Window Slide Called
+New Send Base: 39 with seq 19
+Window Slide Called
+New Send Base: 40 with seq 0
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {0: 'around the man who first finds himself master of his own establishment, were suf'} sent
+Packet {1: 'ficient to absorb all my attention, while Holmes, who loathed every form of soci'} sent
+Packet {2: 'ety with his whole Bohemian soul, remained in our lodgings in Baker Street, buri'} sent
+Packet 3 is lost
+Packet {4: 'bition, the drowsiness of the drug, and the fierce energy of his own keen nature'} sent
+Packet {5: '. He was still, as ever, deeply attracted by the study of crime, and occupied hi'} sent
+Window Slide Called
+Packet 6 is lost
+New Send Base: 41 with seq 1
+Packet 7 is lost
+Window Slide Called
+Packet {8: 'y the official police. From time to time I heard some vague account of his doing'} sent
+New Send Base: 42 with seq 2
+Packet {9: 's: of his summons to Odessa in the case of the Trepoff murder, of his clearing u'} sent
+Window Slide Called
+New Send Base: 43 with seq 3
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {3: 'ed among his old books, and alternating from week to week between cocaine and am'} sent
+Packet 4 is lost
+Packet {5: '. He was still, as ever, deeply attracted by the study of crime, and occupied hi'} sent
+Packet 6 is lost
+Packet {7: 'se clues, and clearing up those mysteries which had been abandoned as hopeless b'} sent
+Window Slide Called
+Packet {8: 'y the official police. From time to time I heard some vague account of his doing'} sent
+New Send Base: 44 with seq 4
+Packet {9: 's: of his summons to Odessa in the case of the Trepoff murder, of his clearing u'} sent
+Packet {10: 'p of the singular tragedy of the Atkinson brothers at Trincomalee, and finally o'} sent
+Packet 11 is lost
+Packet {12: 'eigning family of Holland. Beyond these signs of his activity, however, which I '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {4: 'bition, the drowsiness of the drug, and the fierce energy of his own keen nature'} sent
+Packet {5: '. He was still, as ever, deeply attracted by the study of crime, and occupied hi'} sent
+Packet {6: 's immense faculties and extraordinary powers of observation in following out tho'} sent
+Packet {7: 'se clues, and clearing up those mysteries which had been abandoned as hopeless b'} sent
+Packet 8 is lost
+Window Slide Called
+Packet {9: 's: of his summons to Odessa in the case of the Trepoff murder, of his clearing u'} sent
+New Send Base: 45 with seq 5
+Packet 10 is lost
+Window Slide Called
+Packet {11: 'f the mission which he had accomplished so delicately and successfully for the r'} sent
+New Send Base: 46 with seq 6
+Packet {12: 'eigning family of Holland. Beyond these signs of his activity, however, which I '} sent
+Packet 13 is lost
+Window Slide Called
+New Send Base: 47 with seq 7
+Window Slide Called
+New Send Base: 48 with seq 8
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 8 is lost
+Packet {9: 's: of his summons to Odessa in the case of the Trepoff murder, of his clearing u'} sent
+Packet 10 is lost
+Packet {11: 'f the mission which he had accomplished so delicately and successfully for the r'} sent
+Packet {12: 'eigning family of Holland. Beyond these signs of his activity, however, which I '} sent
+Packet 13 is lost
+Packet {14: 'r friend and companion.\n\nOne night--it was on the twentieth of March, 1888--I wa'} sent
+Packet {15: 's returning from a journey to a patient (for I had now returned to civil practic'} sent
+Packet {16: 'e), when my way led me through Baker Street. As I passed the well-remembered doo'} sent
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {8: 'y the official police. From time to time I heard some vague account of his doing'} sent
+Packet 9 is lost
+Packet {10: 'p of the singular tragedy of the Atkinson brothers at Trincomalee, and finally o'} sent
+Packet {11: 'f the mission which he had accomplished so delicately and successfully for the r'} sent
+Packet {12: 'eigning family of Holland. Beyond these signs of his activity, however, which I '} sent
+Window Slide Called
+New Send Base: 49 with seq 9
+Packet {13: 'merely shared with all the readers of the daily press, I knew little of my forme'} sent
+Packet 14 is lost
+Packet 15 is lost
+Window Slide Called
+Packet {16: 'e), when my way led me through Baker Street. As I passed the well-remembered doo'} sent
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {9: 's: of his summons to Odessa in the case of the Trepoff murder, of his clearing u'} sent
+Packet {10: 'p of the singular tragedy of the Atkinson brothers at Trincomalee, and finally o'} sent
+Packet {11: 'f the mission which he had accomplished so delicately and successfully for the r'} sent
+Packet {12: 'eigning family of Holland. Beyond these signs of his activity, however, which I '} sent
+Packet {13: 'merely shared with all the readers of the daily press, I knew little of my forme'} sent
+Packet {14: 'r friend and companion.\n\nOne night--it was on the twentieth of March, 1888--I wa'} sent
+Packet 15 is lost
+Packet 16 is lost
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Packet 18 is lost
+Window Slide Called
+New Send Base: 50 with seq 10
+Window Slide Called
+New Send Base: 51 with seq 11
+Window Slide Called
+New Send Base: 52 with seq 12
+Window Slide Called
+New Send Base: 53 with seq 13
+Window Slide Called
+New Send Base: 54 with seq 14
+Window Slide Called
+New Send Base: 55 with seq 15
+Window Slide Called
+Sending Packets in Window
+Packet 15 is lost
+Packet {16: 'e), when my way led me through Baker Street. As I passed the well-remembered doo'} sent
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Packet {18: 'incidents of the Study in Scarlet, I was seized with a keen desire to see Holmes'} sent
+Packet {19: ' again, and to know how he was employing his extraordinary powers. His rooms wer'} sent
+Packet {0: 'e brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass t'} sent
+Packet 1 is lost
+Packet {2: 'erly, with his head sunk upon his chest and his hands clasped behind him. To me,'} sent
+Packet 3 is lost
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 15 is lost
+Packet {16: 'e), when my way led me through Baker Street. As I passed the well-remembered doo'} sent
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Packet {18: 'incidents of the Study in Scarlet, I was seized with a keen desire to see Holmes'} sent
+Packet 19 is lost
+Packet {0: 'e brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass t'} sent
+Packet {1: 'wice in a dark silhouette against the blind. He was pacing the room swiftly, eag'} sent
+Packet {2: 'erly, with his head sunk upon his chest and his hands clasped behind him. To me,'} sent
+Packet 3 is lost
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {15: 's returning from a journey to a patient (for I had now returned to civil practic'} sent
+Packet 16 is lost
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Packet 18 is lost
+Packet {19: ' again, and to know how he was employing his extraordinary powers. His rooms wer'} sent
+Window Slide Called
+Packet {0: 'e brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass t'} sent
+Packet {1: 'wice in a dark silhouette against the blind. He was pacing the room swiftly, eag'} sent
+New Send Base: 56 with seq 16
+Packet {2: 'erly, with his head sunk upon his chest and his hands clasped behind him. To me,'} sent
+Packet {3: ' who knew his every mood and habit, his attitude and manner told their own story'} sent
+Window Slide Called
+Packet 4 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {16: 'e), when my way led me through Baker Street. As I passed the well-remembered doo'} sent
+Packet {17: 'r, which must always be associated in my mind with my wooing, and with the dark '} sent
+Packet 18 is lost
+Window Slide Called
+Packet 19 is lost
+New Send Base: 57 with seq 17
+Packet {0: 'e brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass t'} sent
+Packet 1 is lost
+Window Slide Called
+New Send Base: 58 with seq 18
+Packet {2: 'erly, with his head sunk upon his chest and his hands clasped behind him. To me,'} sent
+Packet {3: ' who knew his every mood and habit, his attitude and manner told their own story'} sent
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Packet {5: 'upon the scent of some new problem. I rang the bell and was shown up to the cham'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {18: 'incidents of the Study in Scarlet, I was seized with a keen desire to see Holmes'} sent
+Packet 19 is lost
+Packet 0 is lost
+Packet {1: 'wice in a dark silhouette against the blind. He was pacing the room swiftly, eag'} sent
+Packet {2: 'erly, with his head sunk upon his chest and his hands clasped behind him. To me,'} sent
+Window Slide Called
+Packet {3: ' who knew his every mood and habit, his attitude and manner told their own story'} sent
+New Send Base: 59 with seq 19
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Packet {5: 'upon the scent of some new problem. I rang the bell and was shown up to the cham'} sent
+Window Slide Called
+Packet {6: 'ber which had formerly been in part my own.\n\nHis manner was not effusive. It sel'} sent
+Packet 7 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {19: ' again, and to know how he was employing his extraordinary powers. His rooms wer'} sent
+Packet {0: 'e brilliantly lit, and, even as I looked up, I saw his tall, spare figure pass t'} sent
+Packet {1: 'wice in a dark silhouette against the blind. He was pacing the room swiftly, eag'} sent
+Packet 2 is lost
+Packet 3 is lost
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Window Slide Called
+Packet {5: 'upon the scent of some new problem. I rang the bell and was shown up to the cham'} sent
+New Send Base: 60 with seq 0
+Packet {6: 'ber which had formerly been in part my own.\n\nHis manner was not effusive. It sel'} sent
+Window Slide Called
+Packet 7 is lost
+New Send Base: 61 with seq 1
+Packet {8: 'h a kindly eye, he waved me to an armchair, threw across his case of cigars, and'} sent
+Window Slide Called
+New Send Base: 62 with seq 2
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {2: 'erly, with his head sunk upon his chest and his hands clasped behind him. To me,'} sent
+Packet 3 is lost
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Packet {5: 'upon the scent of some new problem. I rang the bell and was shown up to the cham'} sent
+Packet {6: 'ber which had formerly been in part my own.\n\nHis manner was not effusive. It sel'} sent
+Packet 7 is lost
+Window Slide Called
+Packet {8: 'h a kindly eye, he waved me to an armchair, threw across his case of cigars, and'} sent
+New Send Base: 63 with seq 3
+Packet {9: ' indicated a spirit case and a gasogene in the corner. Then he stood before the '} sent
+Packet 10 is lost
+Window Slide Called
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 3 is lost
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Packet 5 is lost
+Packet 6 is lost
+Packet {7: 'dom was; but he was glad, I think, to see me. With hardly a word spoken, but wit'} sent
+Packet {8: 'h a kindly eye, he waved me to an armchair, threw across his case of cigars, and'} sent
+Packet {9: ' indicated a spirit case and a gasogene in the corner. Then he stood before the '} sent
+Packet {10: 'fire and looked me over in his singular introspective fashion.\n\n"Wedlock suits y'} sent
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Packet {12: ' since I saw you."\n\n"Seven!" I answered.\n\n"Indeed, I should have thought a littl'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {3: ' who knew his every mood and habit, his attitude and manner told their own story'} sent
+Packet {4: '. He was at work again. He had risen out of his drug-created dreams and was hot '} sent
+Packet 5 is lost
+Packet {6: 'ber which had formerly been in part my own.\n\nHis manner was not effusive. It sel'} sent
+Packet {7: 'dom was; but he was glad, I think, to see me. With hardly a word spoken, but wit'} sent
+Packet 8 is lost
+Packet {9: ' indicated a spirit case and a gasogene in the corner. Then he stood before the '} sent
+Window Slide Called
+Packet {10: 'fire and looked me over in his singular introspective fashion.\n\n"Wedlock suits y'} sent
+New Send Base: 64 with seq 4
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Packet 12 is lost
+Window Slide Called
+New Send Base: 65 with seq 5
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {5: 'upon the scent of some new problem. I rang the bell and was shown up to the cham'} sent
+Packet 6 is lost
+Packet {7: 'dom was; but he was glad, I think, to see me. With hardly a word spoken, but wit'} sent
+Packet {8: 'h a kindly eye, he waved me to an armchair, threw across his case of cigars, and'} sent
+Packet 9 is lost
+Window Slide Called
+Packet {10: 'fire and looked me over in his singular introspective fashion.\n\n"Wedlock suits y'} sent
+New Send Base: 66 with seq 6
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Window Slide Called
+Packet 12 is lost
+Packet {13: 'e more. Just a trifle more, I fancy, Watson. And in practice again, I observe. Y'} sent
+Window Slide Called
+Packet {14: 'ou did not tell me that you intended to go into harness."\n\n"Then, how do you kno'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {6: 'ber which had formerly been in part my own.\n\nHis manner was not effusive. It sel'} sent
+Packet {7: 'dom was; but he was glad, I think, to see me. With hardly a word spoken, but wit'} sent
+Packet {8: 'h a kindly eye, he waved me to an armchair, threw across his case of cigars, and'} sent
+Packet 9 is lost
+Packet 10 is lost
+Window Slide Called
+New Send Base: 67 with seq 7
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Packet {12: ' since I saw you."\n\n"Seven!" I answered.\n\n"Indeed, I should have thought a littl'} sent
+Packet {13: 'e more. Just a trifle more, I fancy, Watson. And in practice again, I observe. Y'} sent
+Window Slide Called
+New Send Base: 68 with seq 8
+Packet {14: 'ou did not tell me that you intended to go into harness."\n\n"Then, how do you kno'} sent
+Window Slide Called
+New Send Base: 69 with seq 9
+Packet 15 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 9 is lost
+Packet {10: 'fire and looked me over in his singular introspective fashion.\n\n"Wedlock suits y'} sent
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Packet {12: ' since I saw you."\n\n"Seven!" I answered.\n\n"Indeed, I should have thought a littl'} sent
+Packet {13: 'e more. Just a trifle more, I fancy, Watson. And in practice again, I observe. Y'} sent
+Packet {14: 'ou did not tell me that you intended to go into harness."\n\n"Then, how do you kno'} sent
+Packet {15: 'w?"\n\n"I see it, I deduce it. How do I know that you have been getting yourself v'} sent
+Packet {16: 'ery wet lately, and that you have a most clumsy and careless servant girl?"\n\n"My'} sent
+Packet 17 is lost
+Packet 18 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {9: ' indicated a spirit case and a gasogene in the corner. Then he stood before the '} sent
+Packet {10: 'fire and looked me over in his singular introspective fashion.\n\n"Wedlock suits y'} sent
+Packet 11 is lost
+Packet 12 is lost
+Packet {13: 'e more. Just a trifle more, I fancy, Watson. And in practice again, I observe. Y'} sent
+Packet {14: 'ou did not tell me that you intended to go into harness."\n\n"Then, how do you kno'} sent
+Packet {15: 'w?"\n\n"I see it, I deduce it. How do I know that you have been getting yourself v'} sent
+Packet 16 is lost
+Packet {17: ' dear Holmes," said I, "this is too much. You would certainly have been burned, '} sent
+Packet {18: 'had you lived a few centuries ago. It is true that I had a country walk on Thurs'} sent
+Window Slide Called
+New Send Base: 70 with seq 10
+Window Slide Called
+New Send Base: 71 with seq 11
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {11: 'ou," he remarked. "I think, Watson, that you have put on seven and a half pounds'} sent
+Packet {12: ' since I saw you."\n\n"Seven!" I answered.\n\n"Indeed, I should have thought a littl'} sent
+Packet 13 is lost
+Packet 14 is lost
+Packet {15: 'w?"\n\n"I see it, I deduce it. How do I know that you have been getting yourself v'} sent
+Packet {16: 'ery wet lately, and that you have a most clumsy and careless servant girl?"\n\n"My'} sent
+Packet {17: ' dear Holmes," said I, "this is too much. You would certainly have been burned, '} sent
+Packet 18 is lost
+Packet {19: "day and came home in a dreadful mess, but as I have changed my clothes I can't i"} sent
+Window Slide Called
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+New Send Base: 72 with seq 12
+Window Slide Called
+New Send Base: 73 with seq 13
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {13: 'e more. Just a trifle more, I fancy, Watson. And in practice again, I observe. Y'} sent
+Packet {14: 'ou did not tell me that you intended to go into harness."\n\n"Then, how do you kno'} sent
+Packet {15: 'w?"\n\n"I see it, I deduce it. How do I know that you have been getting yourself v'} sent
+Packet {16: 'ery wet lately, and that you have a most clumsy and careless servant girl?"\n\n"My'} sent
+Packet 17 is lost
+Packet {18: 'had you lived a few centuries ago. It is true that I had a country walk on Thurs'} sent
+Packet 19 is lost
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Window Slide Called
+New Send Base: 74 with seq 14
+Packet 1 is lost
+Packet {2: 'kled to himself and rubbed his long, nervous hands together.\n\n"It is simplicity '} sent
+Window Slide Called
+New Send Base: 75 with seq 15
+Window Slide Called
+New Send Base: 76 with seq 16
+Window Slide Called
+New Send Base: 77 with seq 17
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 17 is lost
+Packet {18: 'had you lived a few centuries ago. It is true that I had a country walk on Thurs'} sent
+Packet {19: "day and came home in a dreadful mess, but as I have changed my clothes I can't i"} sent
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Packet {1: 'given her notice, but there, again, I fail to see how you work it out."\n\nHe chuc'} sent
+Packet {2: 'kled to himself and rubbed his long, nervous hands together.\n\n"It is simplicity '} sent
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet 4 is lost
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Packet 6 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 17 is lost
+Packet {18: 'had you lived a few centuries ago. It is true that I had a country walk on Thurs'} sent
+Packet {19: "day and came home in a dreadful mess, but as I have changed my clothes I can't i"} sent
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Packet {1: 'given her notice, but there, again, I fail to see how you work it out."\n\nHe chuc'} sent
+Packet {2: 'kled to himself and rubbed his long, nervous hands together.\n\n"It is simplicity '} sent
+Packet 3 is lost
+Packet {4: 'ere the firelight strikes it, the leather is scored by six almost parallel cuts.'} sent
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Packet 6 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {17: ' dear Holmes," said I, "this is too much. You would certainly have been burned, '} sent
+Packet 18 is lost
+Packet {19: "day and came home in a dreadful mess, but as I have changed my clothes I can't i"} sent
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Packet 1 is lost
+Packet {2: 'kled to himself and rubbed his long, nervous hands together.\n\n"It is simplicity '} sent
+Window Slide Called
+New Send Base: 78 with seq 18
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet 4 is lost
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Window Slide Called
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 18 is lost
+Packet {19: "day and came home in a dreadful mess, but as I have changed my clothes I can't i"} sent
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Packet 1 is lost
+Packet {2: 'kled to himself and rubbed his long, nervous hands together.\n\n"It is simplicity '} sent
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet 4 is lost
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Packet {7: 'my double deduction that you had been out in vile weather, and that you had a pa'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {18: 'had you lived a few centuries ago. It is true that I had a country walk on Thurs'} sent
+Packet 19 is lost
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Packet 1 is lost
+Packet 2 is lost
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Window Slide Called
+Packet {4: 'ere the firelight strikes it, the leather is scored by six almost parallel cuts.'} sent
+New Send Base: 79 with seq 19
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Packet {7: 'my double deduction that you had been out in vile weather, and that you had a pa'} sent
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {19: "day and came home in a dreadful mess, but as I have changed my clothes I can't i"} sent
+Packet {0: 'magine how you deduce it. As to Mary Jane, she is incorrigible, and my wife has '} sent
+Packet {1: 'given her notice, but there, again, I fail to see how you work it out."\n\nHe chuc'} sent
+Packet 2 is lost
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet 4 is lost
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Window Slide Called
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Packet {7: 'my double deduction that you had been out in vile weather, and that you had a pa'} sent
+New Send Base: 80 with seq 0
+Packet 8 is lost
+Window Slide Called
+New Send Base: 81 with seq 1
+Window Slide Called
+New Send Base: 82 with seq 2
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 2 is lost
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet {4: 'ere the firelight strikes it, the leather is scored by six almost parallel cuts.'} sent
+Packet 5 is lost
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Packet {7: 'my double deduction that you had been out in vile weather, and that you had a pa'} sent
+Packet {8: 'rticularly malignant boot-slitting specimen of the London slavey. As to your pra'} sent
+Packet {9: 'ctice, if a gentleman walks into my rooms smelling of iodoform, with a black mar'} sent
+Packet {10: 'k of nitrate of silver upon his right forefinger, and a bulge on the right side '} sent
+Packet 11 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet 2 is lost
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet 4 is lost
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Packet {7: 'my double deduction that you had been out in vile weather, and that you had a pa'} sent
+Packet {8: 'rticularly malignant boot-slitting specimen of the London slavey. As to your pra'} sent
+Packet {9: 'ctice, if a gentleman walks into my rooms smelling of iodoform, with a black mar'} sent
+Packet {10: 'k of nitrate of silver upon his right forefinger, and a bulge on the right side '} sent
+Packet 11 is lost
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {2: 'kled to himself and rubbed his long, nervous hands together.\n\n"It is simplicity '} sent
+Packet {3: 'itself," said he; "my eyes tell me that on the inside of your left shoe, just wh'} sent
+Packet {4: 'ere the firelight strikes it, the leather is scored by six almost parallel cuts.'} sent
+Packet {5: ' Obviously they have been caused by someone who has very carelessly scraped roun'} sent
+Packet {6: 'd the edges of the sole in order to remove crusted mud from it. Hence, you see, '} sent
+Packet {7: 'my double deduction that you had been out in vile weather, and that you had a pa'} sent
+Packet {8: 'rticularly malignant boot-slitting specimen of the London slavey. As to your pra'} sent
+Window Slide Called
+Packet 9 is lost
+New Send Base: 83 with seq 3
+Packet 10 is lost
+Packet 11 is lost
+Window Slide Called
+New Send Base: 84 with seq 4
+Window Slide Called
+New Send Base: 85 with seq 5
+Window Slide Called
+New Send Base: 86 with seq 6
+Window Slide Called
+New Send Base: 87 with seq 7
+Window Slide Called
+New Send Base: 88 with seq 8
+Window Slide Called
+New Send Base: 89 with seq 9
+Sending Packets in Window
+Packet {9: 'ctice, if a gentleman walks into my rooms smelling of iodoform, with a black mar'} sent
+Packet {10: 'k of nitrate of silver upon his right forefinger, and a bulge on the right side '} sent
+Packet 11 is lost
+Packet {12: 'deed, if I do not pronounce him to be an active member of the medical profession'} sent
+Packet {13: '."\n\x17'} sent
+Window Slide Called
+New Send Base: 90 with seq 10
+Window Slide Called
+New Send Base: 91 with seq 11
+Window Slide Called
+Window Slide Called
+Sending Packets in Window
+Packet {11: 'of his top-hat to show where he has secreted his stethoscope, I must be dull, in'} sent
+Packet 12 is lost
+Packet {13: '."\n\x17'} sent
+Window Slide Called
+New Send Base: 92 with seq 12
+Window Slide Called
+Sending Packets in Window
+Packet {12: 'deed, if I do not pronounce him to be an active member of the medical profession'} sent
+Packet 13 is lost
+Window Slide Called
+New Send Base: 93 with seq 13
+Sending Packets in Window
+Packet {13: '."\n\x17'} sent
+Window Slide Called

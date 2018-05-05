@@ -2,9 +2,15 @@
 import socket
 import logging
 import time
+from helpers.Simulators import get_loss_simulator
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
@@ -21,13 +27,14 @@ def log_when_called(mssg):
 
 class GoBackNSender:
     """Sender for GoBackNserver"""
-    def __init__(self, packets, window_size, client_address):
+    def __init__(self, packets, window_size, client_address, probability, seed_num):
         self.window_size = window_size
         self.packets = packets
         self.send_base = 0
         self.next_seq_num = 1
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.client_address = client_address
+        self.drop_packet = get_loss_simulator(probability, seed_num)
 
     def window(self):
         """
@@ -61,8 +68,11 @@ class GoBackNSender:
         """
         for pkt in self.window():
             # time.sleep(0.5)
-            self.socket.sendto(pkt.bytes(), self.client_address)
-            LOGGER.info("Packet {} sent".format(pkt))
+            if self.drop_packet():
+                LOGGER.warning("Packet {} is lost".format(pkt.seq_num))
+            else:
+                self.socket.sendto(pkt.bytes(), self.client_address)
+                LOGGER.info("Packet {} sent".format(pkt))
         self.next_seq_num += self.window_size
 
     @log_when_called('Window Slide Called')
