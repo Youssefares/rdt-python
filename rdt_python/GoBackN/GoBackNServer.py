@@ -1,13 +1,14 @@
 from threading import Thread, Timer
 import queue
 import logging
+import sys
 
 from .GoBackNSender import GoBackNSender
 from Packet import Packet
 
-WINDOW_SIZE = 5
-TIMEOUT_TIME = 10
-PACKET_LENGTH = 80
+WINDOW_SIZE = 50
+TIMEOUT_TIME = 1
+PACKET_LENGTH = 80*8
 
 
 class GoBackNServer:
@@ -33,21 +34,25 @@ class GoBackNServer:
         sender = GoBackNSender(packets, WINDOW_SIZE, self.client_entry.client_address)
 
         oldest_unacked = 0
-        while True:
-            # request sender to send window to client
-            Thread(target=sender.send_packets_in_window, daemon=True).start()
+        # request sender to send window to client
+        Thread(target=sender.send_packets_in_window, daemon=True).start()
+        
+        # start timer for lastest unacked element
+        t = Timer(TIMEOUT_TIME, sender.send_packets_in_window)
+        t.start()
 
-            t = Timer(TIMEOUT_TIME, sender.send_packets_in_window)
-            t.start()
+        while len(sender.window()):
             try:
                 # while there's no acks in the queue or timeout for oldest unacked packet
                 ack_packet = Packet(packet_bytes=self.client_entry.queue.get())
                 self.logger.info('Ack recieved {}'.format(ack_packet))
                 print('Ack recieved {}'.format(ack_packet))
+                # TODO: When the seq number recieved is out of seq (one that was sent)
                 # TODO: Handle the fact that this seq number may not be in the window
                 oldest_unacked = (ack_packet.seq_num + 1) % (2 * WINDOW_SIZE)
                 sender.slide(ack_packet.seq_num)
                 
+                # restart the time
                 t.cancel()
                 t = Timer(TIMEOUT_TIME, sender.send_packets_in_window)
                 t.start()
@@ -56,7 +61,3 @@ class GoBackNServer:
                 # TODO: change time out to handle this case
                 self.logger.info('Timeout')
                 pass
-            except queue.Empty:
-                print("Queue is empty")
-                self.logger.info('Queue is empty. send packets in window')
-                Thread(target=sender.send_packets_in_window, daemon=True).start()

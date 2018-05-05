@@ -6,7 +6,7 @@ import logging
 
 from Packet import Packet
 
-WINDOW_SIZE = 5
+WINDOW_SIZE = 50
 
 class GoBackNClient:
     def __init__(self, client_address):
@@ -56,14 +56,16 @@ class GoBackNClient:
                 to_be_recieved = (to_be_recieved + 1) % (2 * WINDOW_SIZE)
 
                 # check if last packet join the thread and exit
-                if pkt.last_pkt:
+                if pkt.is_last_pkt:
                     self.logger.info('Last Packet recieved, creating file.')
                     end_event.set()
-                    with open(''+file_name.split('/')[-1], 'w') as f:
+                    with open('recieved/'+file_name.split('/')[-1], 'w') as f:
                         f.write(''.join(buffer))
+                    self.logger.info('File Recieved Successfully.. Exiting')
+                    break
 
             else:
-                self.logger.info('An out-of-sequence packet recieved.')
+                self.logger.info('An out-of-sequence packet recieved. ', pkt)
                 # send ack for last recieved packet
                 self.socket.sendto(Packet(seq_num=last_recieved, data='').bytes(), server_address)
                 

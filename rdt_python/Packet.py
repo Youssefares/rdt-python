@@ -76,16 +76,14 @@ class Packet:
                 remaining_length = file_length - i
                 packets.append(Packet(seq_num=seq_num, data=file[i:i+min(packet_chars, remaining_length)]))
                 i += min(packet_chars, remaining_length)
-                seq_num = (seq_num + 1) % ( 2* window_size)
+                seq_num = (seq_num + 1) % (2 * window_size)
 
             if len(packets[-1].data) < packet_chars:
                 print(packets[-1].data)
                 packets[-1].data += EOT_CHR
             else:
                 packets.append(Packet(seq_num=seq_num, data=EOT_CHR))
-        print(packets)
         return packets
-
 
 
 if __name__ == "__main__":
