@@ -47,7 +47,7 @@ def main_receive_loop(file_name):
         seq_number = (seq_number + 1) % 2
         if pkt_data.is_last_pkt:
             with open("received/{}".format(file_name.split('/')[-1]), 'w+') as f:
-                f.write(' '.join(buffer))
+                f.write(''.join(buffer))
             LOGGER.info("FILE RECEIVED AND SAVED...")
             break
 
