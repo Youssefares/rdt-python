@@ -3,10 +3,17 @@ import socket
 import logging
 import time
 
+# Logger configs
+LOGGER = logging.getLogger(__name__)
+TERIMAL_HANDLER = logging.StreamHandler()
+TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
+TERIMAL_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(TERIMAL_HANDLER)
+
 def log_when_called(mssg):
     def log_when_called_decorator(fn):
         def new_fn(*args, **kargs):
-            print(mssg)
+            LOGGER.info(mssg)
             fn(*args, **kargs)
         return new_fn
     return log_when_called_decorator
@@ -21,8 +28,6 @@ class GoBackNSender:
         self.next_seq_num = 1
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.client_address = client_address
-        self.logger = logging.getLogger('gbn_sender')
-        self.logger.addHandler(logging.StreamHandler())
 
     def window(self):
         """
@@ -54,11 +59,10 @@ class GoBackNSender:
         """
         sends packets in the window one by one to the client
         """
-        print("Window Length: ", len(self.window()))
         for pkt in self.window():
             # time.sleep(0.5)
             self.socket.sendto(pkt.bytes(), self.client_address)
-            print("Packet {} sent".format(pkt))
+            LOGGER.info("Packet {} sent".format(pkt))
         self.next_seq_num += self.window_size
 
     @log_when_called('Window Slide Called')
@@ -69,7 +73,7 @@ class GoBackNSender:
         for i, pkt in enumerate(self.window()):
             if last_acked_seq_num == pkt.seq_num:
                 self.send_base = self.send_base + i + 1
-                print("HELODOSDOASODASDO >>>>> New Send Base: {} with seq {}".\
+                LOGGER.info("New Send Base: {} with seq {}".\
                     format(self.send_base, self.packets[self.send_base].seq_num))
                 break
 

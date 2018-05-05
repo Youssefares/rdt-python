@@ -1,11 +1,18 @@
 import socket
 import time
-
+import logging
 from config import client_config
 from Packet import Packet
 
 CONFIG_FILE = "inputs/client.in"
 PACKET_LEN = 50
+
+# Logger configs
+LOGGER = logging.getLogger(__name__)
+TERIMAL_HANDLER = logging.StreamHandler()
+TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
+TERIMAL_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(TERIMAL_HANDLER)
 
 SERVER_IP, SERVER_PORT, CLIENT_PORT, FILE, RCV_WINDOW_SIZE = client_config(
     CONFIG_FILE)
@@ -22,12 +29,12 @@ def main_receive_loop(file_name):
     pkt = Packet(seq_num=seq_number, data=file_name)
     while True:
         S_CLIENT.sendto(pkt.bytes(), (SERVER_IP, SERVER_PORT))
-        print("PACKET SEQ {} SENT...".format(seq_number))
+        LOGGER.info("PACKET SEQ {} SENT...".format(seq_number))
         # FIXME: 512 should be el buffer size exactly
         packet, address = S_CLIENT.recvfrom(512)
         # Simulates network layer delay
         # time.sleep(0.5)
-        print("RECEIVED PACKET: ", packet)
+        LOGGER.info("RECEIVED PACKET: {}".format(packet))
 
         pkt_data = Packet(packet_bytes=packet)
 
@@ -41,7 +48,7 @@ def main_receive_loop(file_name):
         if pkt_data.is_last_pkt:
             with open("received/{}".format(file_name.split('/')[-1]), 'w+') as f:
                 f.write(' '.join(buffer))
-            print("FILE RECEIVED AND SAVED...")
+            LOGGER.info("FILE RECEIVED AND SAVED...")
             break
 
 if __name__ == '__main__':

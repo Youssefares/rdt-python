@@ -10,6 +10,13 @@ WINDOW_SIZE = 50
 TIMEOUT_TIME = 1
 PACKET_LENGTH = 80*8
 
+# Logger configs
+LOGGER = logging.getLogger(__name__)
+TERIMAL_HANDLER = logging.StreamHandler()
+TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
+TERIMAL_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(TERIMAL_HANDLER)
+
 
 class GoBackNServer:
     """
@@ -18,8 +25,6 @@ class GoBackNServer:
     def __init__(self, client_entry):
         # self.sender = GoBackNSender(packets, WINDOW_SIZE, client_entry.address)
         self.client_entry = client_entry
-        self.logger = logging.getLogger('gbn_server')
-        self.logger.addHandler(logging.StreamHandler())
     
     def start(self):
         """
@@ -28,7 +33,7 @@ class GoBackNServer:
         # get first packet that has the file name
         request_pkt = Packet(packet_bytes=self.client_entry.queue.get())
         file_name = request_pkt.data
-        self.logger.info('Recieved Request for file: {}'.format(file_name))
+        LOGGER.info('Recieved Request for file: {}'.format(file_name))
         packets = Packet.get_file_packets(file_name, PACKET_LENGTH, WINDOW_SIZE)
 
         sender = GoBackNSender(packets, WINDOW_SIZE, self.client_entry.client_address)
@@ -45,8 +50,7 @@ class GoBackNServer:
             try:
                 # while there's no acks in the queue or timeout for oldest unacked packet
                 ack_packet = Packet(packet_bytes=self.client_entry.queue.get())
-                self.logger.info('Ack recieved {}'.format(ack_packet))
-                print('Ack recieved {}'.format(ack_packet))
+                LOGGER.info('{} recieved {}'.format('Ack' if ack_packet.is_ack else 'Data', ack_packet))
                 # TODO: When the seq number recieved is out of seq (one that was sent)
                 # TODO: Handle the fact that this seq number may not be in the window
                 oldest_unacked = (ack_packet.seq_num + 1) % (2 * WINDOW_SIZE)
@@ -59,5 +63,5 @@ class GoBackNServer:
             except ValueError:
                 # this means that the ack is not valid so we ignore it
                 # TODO: change time out to handle this case
-                self.logger.info('Timeout')
+                LOGGER.info('Timeout')
                 pass

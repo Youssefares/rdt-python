@@ -1,6 +1,14 @@
 from Packet import Packet
 import socket
+import logging
 from collections import deque
+
+# Logger configs
+LOGGER = logging.getLogger(__name__)
+TERIMAL_HANDLER = logging.StreamHandler()
+TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
+TERIMAL_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(TERIMAL_HANDLER)
 
 class StopAndWaitServer:
     """
@@ -20,12 +28,12 @@ class StopAndWaitServer:
         Transfer the requested file to the client
         """
         S_SERVER = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        print("STOP AND WAIT SERVER HANDLER RUNNING..")
+        LOGGER.info("STOP AND WAIT SERVER HANDLER RUNNING..")
         # TODO handle inactive client
         while True:
             # TODO handle timeout here
             self.client_entry.e.wait()
-            print("RECEIVED PACKET: ", self.client_entry.pkt)
+            LOGGER.info("RECEIVED PACKET: {}".format(self.client_entry.pkt))
             parsed_pkt = Packet(packet_bytes=self.client_entry.pkt)
             # first check if seq number is correct else drop
             if parsed_pkt.seq_num is not self.seq:
@@ -40,7 +48,7 @@ class StopAndWaitServer:
                         self.client_entry.client_address
                     )
                 else:
-                    print("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
+                    LOGGER.info("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
                     break
             else:
                 file_name = parsed_pkt.data

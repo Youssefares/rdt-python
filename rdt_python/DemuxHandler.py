@@ -6,10 +6,17 @@ connections on top of a single UDP Connection
 from threading import Thread, Event, active_count
 import socket
 from queue import Queue
+import logging
 
 import StopAndWaitServer
 from GoBackN.GoBackNServer import GoBackNServer
 
+# Logger configs
+LOGGER = logging.getLogger(__name__)
+TERIMAL_HANDLER = logging.StreamHandler()
+TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
+TERIMAL_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(TERIMAL_HANDLER)
 
 class SWEntry:
     __slots__ = ['e', 'pkt', 'client_address']
@@ -61,22 +68,22 @@ class DemuxHandler:
         :param address: client address (host, port) tuple
         :return: None
         """
-        print("PACKET RECEIVED FROM ", address)
+        LOGGER.info("Packet Received from {}".format(address))
         if address in self.threads_table:
-            print("PASSING TO EXISTING HANDLER")
+            LOGGER.debug("Passing {}'s request to existing Handler".format(address))
             # thread exists pass the new packet to the thread
             self._pass_packet(packet, address)
         else:
             # create new thread for this client
             if self.server_type == 'sw':
-                print("CREATING NEW SERVER HANDLER")
+                LOGGER.debug("Creating a new SW Handler for {}".format(address))
                 th_entry = self._get_new_SW_thread_table_entry(address)
                 self.threads_table[address] = th_entry
                 th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry], daemon=True)
-                th.setName('SW Thread # {}'.format(active_count()))    
+                th.setName('SW Thread # {}'.format(active_count()))
             
             if self.server_type == 'gbn':
-                print("CREATING NEW GBN SERVER HANDLER")
+                LOGGER.debug("Creating a new GBN Handler for {}".format(address))
                 th_entry = self._get_new_GBN_thread_table_entry(address)
                 self.threads_table[address] = th_entry
                 th = Thread(target=lambda client_entry: GoBackNServer(client_entry).start(), args=[th_entry], daemon=True)
@@ -95,8 +102,6 @@ class DemuxHandler:
         shared_res = self.threads_table[address]
         if self.server_type == 'sw':
             # Wait until the last event was handled
-            # while shared_res.e.is_set():
-            #     pass
             shared_res.e.set()
             shared_res.pkt = packet
         elif self.server_type == 'gbn':
