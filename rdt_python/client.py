@@ -1,11 +1,21 @@
 from GoBackN.GoBackNClient import GoBackNClient
+from SelectiveRepeat.SelectiveRepeatClient import SelectiveRepeatClient
+
 import logging
 import sys
 
+client_class_dict = {
+  'gbn': GoBackNClient,
+  'sr': SelectiveRepeatClient
+}
+
 if __name__ == '__main__':
-    port_num = int(sys.argv[1])
-    dest = sys.argv[2]
+    client_protocol = sys.argv[1]
+    port_num = int(sys.argv[2])
+    dest = sys.argv[3]
+
+    # get class constructor from first cmd line arg
+    client = client_class_dict[client_protocol]
 
     logging.basicConfig(level=logging.DEBUG)
-    GoBackNClient(('localhost', port_num)).request_file(('localhost', 6222), 'public/big_file.txt', dest)
-    # GoBackNClient(('localhost', 5858)).request_file(('localhost', 6222), 'public/big_file.txt', 'c2.txt')
+    client(('localhost', port_num)).request_file(('localhost', 6222), 'public/big_file.txt', dest)
