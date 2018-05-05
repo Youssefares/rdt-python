@@ -37,10 +37,12 @@ class StopAndWaitServer:
             parsed_pkt = Packet(packet_bytes=self.client_entry.pkt)
             # first check if seq number is correct else drop
             if parsed_pkt.seq_num is not self.seq:
+                LOGGER.warning("Recieved packet out of sequence {}".format(Packet))
                 self.client_entry.e.clear()
                 continue
             # else check the packet type if data or acknowledgement
             if parsed_pkt.is_ack:
+                LOGGER.info("Recieved Ack for packet seq {}".format(parsed_pkt.seq_num))
                 self.seq = (self.seq + 1) % 2
                 if self.file_packets_queue:
                     S_SERVER.sendto(
@@ -51,14 +53,17 @@ class StopAndWaitServer:
                     LOGGER.info("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
                     break
             else:
+                LOGGER.info("Recieved File Request for file {}".format(parsed_pkt.data))
                 file_name = parsed_pkt.data
                 self.file_packets_queue = deque(
-                    Packet.get_file_packets(file_name, Packet.PACKET_LENGTH, 2)
+                    Packet.get_file_packets(file_name, Packet.PACKET_LENGTH, 1)
                 )
                 S_SERVER.sendto(
                     self.file_packets_queue.popleft().bytes(),
                     self.client_entry.client_address
                 )
+                self.seq = 1
+                
             self.client_entry.e.clear()
 
 
