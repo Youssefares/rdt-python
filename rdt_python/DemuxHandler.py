@@ -10,6 +10,7 @@ import logging
 
 import StopAndWaitServer
 from GoBackN.GoBackNServer import GoBackNServer
+from SelectiveRepeat.SelectiveRepeatServer import SelectiveRepeatServer
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
@@ -40,6 +41,15 @@ class GBNEntry:
     def get_tuple(self):
         return self.queue, self.client_address
 
+class SREntry:
+    __slots__ = ['queue', 'client_address']
+
+    def __init__(self, queue, client_address):
+        self.queue = queue
+        self.client_address = client_address
+    
+    def get_tuple(self):
+        return self.queue, self.client_address
 
 class DemuxHandler:
     """
@@ -82,12 +92,16 @@ class DemuxHandler:
                 th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry], daemon=True)
                 th.setName('SW Thread # {}'.format(active_count()))
             
-            if self.server_type == 'gbn':
+            elif self.server_type == 'gbn':
                 LOGGER.debug("Creating a new GBN Handler for {}".format(address))
                 th_entry = self._get_new_GBN_thread_table_entry(address)
                 self.threads_table[address] = th_entry
                 th = Thread(target=lambda client_entry: GoBackNServer(client_entry).start(), args=[th_entry], daemon=True)
-            
+            elif self.server_type == 'sr':
+                LOGGER.debug("Creating a new SR Handler for {}".format(address))
+                th_entry = self._get_new_SR_thread_table_entry(address)
+                self.threads_table[address] = th_entry
+                th = Thread(target=lambda client_entry: SelectiveRepeatServer(client_entry).start(), args=[th_entry], daemon=True)
             th.start()
             self._pass_packet(packet, address)
 
@@ -106,6 +120,8 @@ class DemuxHandler:
             shared_res.pkt = packet
         elif self.server_type == 'gbn':
             shared_res.queue.put(packet)
+        elif self.server_type == 'sr':
+            shared_res.queue.put(packet)
 
     def _get_new_SW_thread_table_entry(self, address):
         """
@@ -116,6 +132,10 @@ class DemuxHandler:
 
     def _get_new_GBN_thread_table_entry(self, address):
         return GBNEntry(queue=Queue(), client_address=address)
+
+    def _get_new_SR_thread_table_entry(self, address):
+        return SREntry(queue=Queue(), client_address=address)
+
 
     @staticmethod
     def _debug_dummy_server(entry):

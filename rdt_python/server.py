@@ -46,7 +46,7 @@ S_SERVER.bind(('localhost', SERVER_PORT))
 #     print("Replied with packet #%i:" % i, packet.bytes(), "To client: ", addr)
 
 if __name__ == '__main__':
-  server_protocol = sys.argv[1] if sys.argv[1] else 'gbn'
+  server_protocol = sys.argv[1] if len(sys.argv) > 1 else 'gbn'
   demux_handler = DemuxHandler(server_protocol)
   while True:
     PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
