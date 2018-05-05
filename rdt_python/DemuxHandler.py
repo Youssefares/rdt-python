@@ -56,9 +56,11 @@ class DemuxHandler:
                 )
 
     """
-    def __init__(self, server_type='sw'):
+    def __init__(self, server_type, probability, seed_num):
         self.server_type = server_type
         self.threads_table = dict()
+        self.probability = probability
+        self.seed_num = seed_num
 
     def demux_or_create(self, packet, address):
         """
@@ -79,7 +81,7 @@ class DemuxHandler:
                 LOGGER.debug("Creating a new SW Handler for {}".format(address))
                 th_entry = self._get_new_SW_thread_table_entry(address)
                 self.threads_table[address] = th_entry
-                th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry], daemon=True)
+                th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry, self.probability, self.seed_num], daemon=True)
                 th.setName('SW Thread # {}'.format(active_count()))
             
             if self.server_type == 'gbn':

@@ -2,6 +2,8 @@ from Packet import Packet
 import socket
 import logging
 from collections import deque
+from helpers.Simulators import get_loss_simulator
+from threading import Timer
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
@@ -10,18 +12,23 @@ TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
 LOGGER.addHandler(TERIMAL_HANDLER)
 
+# Configs
+TIMEOUT = 5
+
 class StopAndWaitServer:
     """
     Implementation of the StopAndWait protocol for handling
     client request
     """
-    def __init__(self, client_entry):
+    def __init__(self, client_entry, probability, seed_num):
         """
         :param client_entry: SWEntry
         """
         self.client_entry = client_entry
         self.seq = 0
         self.file_packets_queue = None
+        self.drop_current = get_loss_simulator(probability, seed_num)
+        self.timer = None
 
     def start(self):
         """
@@ -35,22 +42,27 @@ class StopAndWaitServer:
             self.client_entry.e.wait()
             LOGGER.info("RECEIVED PACKET: {}".format(self.client_entry.pkt))
             parsed_pkt = Packet(packet_bytes=self.client_entry.pkt)
-            # first check if seq number is correct else drop
-            if parsed_pkt.seq_num is not self.seq:
-                LOGGER.warning("Recieved packet out of sequence {}".format(Packet))
-                self.client_entry.e.clear()
-                continue
-            # else check the packet type if data or acknowledgement
+
+            # check the packet type if data or acknowledgement
             if parsed_pkt.is_ack:
+                # first check if seq number is correct else drop
+                if parsed_pkt.seq_num is not self.seq:
+                    LOGGER.warning("Recieved packet out of sequence {}".format(Packet))
+                    self.client_entry.e.clear()
+                    continue
+
                 LOGGER.info("Recieved Ack for packet seq {}".format(parsed_pkt.seq_num))
+                self.timer.cancel()
                 self.seq = (self.seq + 1) % 2
                 if self.file_packets_queue:
-                    S_SERVER.sendto(
-                        self.file_packets_queue.popleft().bytes(),
-                        self.client_entry.client_address
-                    )
+                    # S_SERVER.sendto(
+                    #     self.file_packets_queue.popleft().bytes(),
+                    #     self.client_entry.client_address
+                    # )
+                    self.send_packet_and_set_timer(self.file_packets_queue.popleft(), S_SERVER)
                 else:
                     LOGGER.info("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
+                    self.timer.cancel()
                     break
             else:
                 LOGGER.info("Recieved File Request for file {}".format(parsed_pkt.data))
@@ -58,18 +70,29 @@ class StopAndWaitServer:
                 self.file_packets_queue = deque(
                     Packet.get_file_packets(file_name, Packet.PACKET_LENGTH, 1)
                 )
-                S_SERVER.sendto(
-                    self.file_packets_queue.popleft().bytes(),
-                    self.client_entry.client_address
-                )
+                # S_SERVER.sendto(
+                #     self.file_packets_queue.popleft().bytes(),
+                #     self.client_entry.client_address
+                # )
+                self.send_packet_and_set_timer(self.file_packets_queue.popleft(), S_SERVER)
                 self.seq = 1
-                
+
             self.client_entry.e.clear()
 
+    def send_packet_and_set_timer(self, pkt, server_socket):
+        drop = self.drop_current()
+        if drop:
+            LOGGER.warning("Packet seq {} is lost".format(pkt.seq_num))
+        else:
+            LOGGER.info("Packet {} is sent".format(pkt))
+            server_socket.sendto(pkt.bytes(), self.client_entry.client_address)
+        
+        self.timer = Timer(TIMEOUT, self.send_packet_and_set_timer, args=[pkt, server_socket])
+        self.timer.start()
+        
+        return not drop
 
-def run_handler(entry):
+def run_handler(entry, probability, seed_num):
     """ runs handler """
-    # TODO: refactor that the threads runs on __init__ if this function
-    # proves not to be needed
-    server = StopAndWaitServer(entry)
+    server = StopAndWaitServer(entry, probability, seed_num)
     server.start()

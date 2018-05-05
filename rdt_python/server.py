@@ -47,7 +47,10 @@ S_SERVER.bind(('localhost', SERVER_PORT))
 
 if __name__ == '__main__':
   server_protocol = sys.argv[1] if sys.argv[1] else 'gbn'
-  demux_handler = DemuxHandler(server_protocol)
+  probability = 0.3
+  seed_num = 1000
+
+  demux_handler = DemuxHandler(server_protocol, probability, seed_num)
   while True:
     PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
     demux_handler.demux_or_create(packet=PACKET, address=ADDR)
