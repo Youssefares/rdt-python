@@ -14,14 +14,14 @@ class Packet:
     def __init__(self, seq_num=None, data=None, packet_bytes=None):
         if packet_bytes:
             # Assumes 16 byte (32 hex digits) checksum as calculated by md5
-            print("BYTES: ")
-            print(packet_bytes)
+            # print("BYTES: ")
+            # print(packet_bytes)
             check_sum = packet_bytes[:32].decode('utf-8')
             self.seq_num = packet_bytes[32]
             self.len = packet_bytes[33]
             self.data = packet_bytes[34:].decode('utf-8')
-            print("DATA: ")
-            print(len(self.data))
+            # print("DATA: ")
+            # print(len(self.data))
             if check_sum != self.check_sum():
                 raise ValueError("Packet corrupt: Checksum values don't match")
         else:
@@ -62,8 +62,8 @@ class Packet:
     @staticmethod
     def get_file_packets(file, packet_len, window_size):
         root_dir = os.path.dirname(os.path.abspath(__file__))
-        print(file)
-        print(root_dir)
+        # print(file)
+        # print(root_dir)
         packet_chars = floor(packet_len / 8)
         packets = []
         with open('{}/{}'.format(root_dir, file), 'r') as f:
@@ -76,16 +76,14 @@ class Packet:
                 remaining_length = file_length - i
                 packets.append(Packet(seq_num=seq_num, data=file[i:i+min(packet_chars, remaining_length)]))
                 i += min(packet_chars, remaining_length)
-                seq_num = (seq_num + 1) % ( 2* window_size)
+                seq_num = (seq_num + 1) % (2 * window_size)
 
             if len(packets[-1].data) < packet_chars:
-                print(packets[-1].data)
+                # print(packets[-1].data)
                 packets[-1].data += EOT_CHR
             else:
                 packets.append(Packet(seq_num=seq_num, data=EOT_CHR))
-        print(packets)
         return packets
-
 
 
 if __name__ == "__main__":
