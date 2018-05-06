@@ -26,14 +26,15 @@ class SelectiveRepeatServer:
     """
     Main entry point for SelectiveRepeat Server
     """
-    def __init__(self, client_entry):
+    def __init__(self, client_entry, probability, seed_num, close_connection_callback):
         self.client_entry = client_entry
         self.send_base = 0
         self.next_seq_num = 0
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.client_address = self.client_entry.client_address
         self.timers_lock = Lock()
-        self.drop_this_packet = get_loss_simulator(0.3, 1000)
+        self.drop_this_packet = get_loss_simulator(probability, seed_num)
+        self.close_connection_callback = close_connection_callback
 
     def send_packet(self, i, pkt):
         """
@@ -131,3 +132,4 @@ class SelectiveRepeatServer:
                 LOGGER.error("ack_packet not in window, no effect")
                 pass
         LOGGER.info("\n Done sending all {} packets".format(self.send_base))
+        self.close_connection_callback()

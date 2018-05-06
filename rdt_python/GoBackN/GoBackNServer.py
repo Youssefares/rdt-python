@@ -28,11 +28,12 @@ class GoBackNServer:
     """
     Main entry point for GoBackN Server
     """
-    def __init__(self, client_entry, probabilty, seed_num):
+    def __init__(self, client_entry, probabilty, seed_num, close_connection_callback):
         # self.sender = GoBackNSender(packets, WINDOW_SIZE, client_entry.address)
         self.client_entry = client_entry
         self.probabilty = probabilty
         self.seed_num = seed_num
+        self.close_connection_callback = close_connection_callback
     
     def start(self):
         """
@@ -62,7 +63,11 @@ class GoBackNServer:
                 # TODO: When the seq number recieved is out of seq (one that was sent)
                 # TODO: Handle the fact that this seq number may not be in the window
                 oldest_unacked = (ack_packet.seq_num + 1) % (2 * WINDOW_SIZE)
-                sender.slide(ack_packet.seq_num)
+                try:
+                    sender.slide(ack_packet.seq_num)
+                except (StopIteration, IndexError) as e:
+                    LOGGER.info("File sent successfully.. closing connection.")
+                    break
                 
                 # restart the time
                 t.cancel()
@@ -73,3 +78,5 @@ class GoBackNServer:
                 # TODO: change time out to handle this case
                 LOGGER.info('Timeout')
                 pass
+
+        self.close_connection_callback()

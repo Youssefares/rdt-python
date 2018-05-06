@@ -40,7 +40,10 @@ class GoBackNSender:
         """
         return list of packets within window
         """
-        return self.packets[self.send_base: self.send_base + self.window_size]
+        if self.send_base + self.window_size >= len(self.packets):
+            return self.packets[self.send_base:]
+        else:
+            return self.packets[self.send_base: self.send_base + self.window_size]
 
     # Debug functions
     def sent_acked(self):
@@ -83,6 +86,10 @@ class GoBackNSender:
         for i, pkt in enumerate(self.window()):
             if last_acked_seq_num == pkt.seq_num:
                 self.send_base = self.send_base + i + 1
+
+                if self.send_base > len(self.packets):
+                    raise StopIteration()
+
                 LOGGER.info("New Send Base: {} with seq {}".\
                     format(self.send_base, self.packets[self.send_base].seq_num))
                 break

@@ -110,12 +110,17 @@ class DemuxHandler:
                     LOGGER.debug("Creating a new GBN Handler for {}".format(address))
                     th_entry = self._get_new_GBN_thread_table_entry(address)
                     self.threads_table[address] = th_entry
-                    th = Thread(target=lambda client_entry: GoBackNServer(client_entry, self.probability, self.seed_num).start(), args=[th_entry], daemon=True)
+                    th = Thread(
+                        target=lambda client_entry: GoBackNServer(client_entry, self.probability, self.seed_num, self.get_close_connection_callback(address)).start(),
+                        args=[th_entry],
+                        daemon=True
+                    )
                 elif self.server_type == 'sr':
                     LOGGER.debug("Creating a new SR Handler for {}".format(address))
                     th_entry = self._get_new_SR_thread_table_entry(address)
                     self.threads_table[address] = th_entry
-                    th = Thread(target=lambda client_entry: SelectiveRepeatServer(client_entry).start(), args=[th_entry], daemon=True)
+                    th = Thread(target=lambda client_entry: SelectiveRepeatServer(client_entry,self.probability, self.seed_num, self.get_close_connection_callback(address)).start(),
+                    args=[th_entry], daemon=True)
                 th.start()
                 self._pass_packet(packet, address)
 
