@@ -10,7 +10,7 @@ class Packet:
     """
     data packet class
     """
-    PACKET_LENGTH = 80
+    PACKET_LENGTH = 80*8
     def __init__(self, seq_num=None, data=None, packet_bytes=None):
         if packet_bytes:
             # Assumes 16 byte (32 hex digits) checksum as calculated by md5

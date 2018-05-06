@@ -3,7 +3,7 @@ This module implements a simple demultiplexer to handle multiple client
 connections on top of a single UDP Connection
 """
 
-from threading import Thread, Event, active_count
+from threading import Thread, Event, active_count, Lock
 import socket
 from queue import Queue
 import logging
@@ -76,6 +76,7 @@ class DemuxHandler:
         self.threads_table = dict()
         self.probability = probability
         self.seed_num = seed_num
+        self.threads_table_lock = Lock()
 
     def demux_or_create(self, packet, address):
         """
@@ -86,31 +87,37 @@ class DemuxHandler:
         :return: None
         """
         LOGGER.info("Packet Received from {}".format(address))
-        if address in self.threads_table:
-            LOGGER.debug("Passing {}'s request to existing Handler".format(address))
-            # thread exists pass the new packet to the thread
-            self._pass_packet(packet, address)
-        else:
-            # create new thread for this client
-            if self.server_type == 'sw':
-                LOGGER.debug("Creating a new SW Handler for {}".format(address))
-                th_entry = self._get_new_SW_thread_table_entry(address)
-                self.threads_table[address] = th_entry
-                th = Thread(target=StopAndWaitServer.run_handler, args=[th_entry, self.probability, self.seed_num], daemon=True)
-                th.setName('SW Thread # {}'.format(active_count()))
-            
-            elif self.server_type == 'gbn':
-                LOGGER.debug("Creating a new GBN Handler for {}".format(address))
-                th_entry = self._get_new_GBN_thread_table_entry(address)
-                self.threads_table[address] = th_entry
-                th = Thread(target=lambda client_entry: GoBackNServer(client_entry, self.probability, self.seed_num).start(), args=[th_entry], daemon=True)
-            elif self.server_type == 'sr':
-                LOGGER.debug("Creating a new SR Handler for {}".format(address))
-                th_entry = self._get_new_SR_thread_table_entry(address)
-                self.threads_table[address] = th_entry
-                th = Thread(target=lambda client_entry: SelectiveRepeatServer(client_entry).start(), args=[th_entry], daemon=True)
-            th.start()
-            self._pass_packet(packet, address)
+        with self.threads_table_lock:
+            if address in self.threads_table:
+                LOGGER.debug("Passing {}'s request to existing Handler".format(address))
+                # thread exists pass the new packet to the thread
+                self._pass_packet(packet, address)
+            else:
+                # create new thread for this client
+                if self.server_type == 'sw':
+                    LOGGER.debug("Creating a new SW Handler for {}".format(address))
+                    th_entry = self._get_new_SW_thread_table_entry(address)
+                    self.threads_table[address] = th_entry
+                    th = Thread(
+                        target=StopAndWaitServer.run_handler,
+                        args=[th_entry, self.probability, self.seed_num, 
+                        self.get_close_connection_callback(address)], 
+                        daemon=True
+                    )
+                    th.setName('SW Thread # {}'.format(active_count()))
+                
+                elif self.server_type == 'gbn':
+                    LOGGER.debug("Creating a new GBN Handler for {}".format(address))
+                    th_entry = self._get_new_GBN_thread_table_entry(address)
+                    self.threads_table[address] = th_entry
+                    th = Thread(target=lambda client_entry: GoBackNServer(client_entry, self.probability, self.seed_num).start(), args=[th_entry], daemon=True)
+                elif self.server_type == 'sr':
+                    LOGGER.debug("Creating a new SR Handler for {}".format(address))
+                    th_entry = self._get_new_SR_thread_table_entry(address)
+                    self.threads_table[address] = th_entry
+                    th = Thread(target=lambda client_entry: SelectiveRepeatServer(client_entry).start(), args=[th_entry], daemon=True)
+                th.start()
+                self._pass_packet(packet, address)
 
     def _pass_packet(self, packet, address):
         """
@@ -143,6 +150,12 @@ class DemuxHandler:
     def _get_new_SR_thread_table_entry(self, address):
         return SREntry(queue=Queue(), client_address=address)
 
+    def get_close_connection_callback(self, address):
+        def close_connection():
+            with self.threads_table_lock:
+                self.threads_table.pop(address, None)
+            LOGGER.info("Connection with Client {} is Closed".format(address))
+        return close_connection
 
     @staticmethod
     def _debug_dummy_server(entry):

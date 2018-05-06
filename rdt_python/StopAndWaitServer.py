@@ -7,20 +7,25 @@ from threading import Timer
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
 LOGGER.addHandler(TERIMAL_HANDLER)
 
 # Configs
-TIMEOUT = 5
+TIMEOUT = 1
 
 class StopAndWaitServer:
     """
     Implementation of the StopAndWait protocol for handling
     client request
     """
-    def __init__(self, client_entry, probability, seed_num):
+    def __init__(self, client_entry, probability, seed_num, close_connection_callback):
         """
         :param client_entry: SWEntry
         """
@@ -29,6 +34,7 @@ class StopAndWaitServer:
         self.file_packets_queue = None
         self.drop_current = get_loss_simulator(probability, seed_num)
         self.timer = None
+        self.close_connection_callback = close_connection_callback
 
     def start(self):
         """
@@ -38,7 +44,6 @@ class StopAndWaitServer:
         LOGGER.info("STOP AND WAIT SERVER HANDLER RUNNING..")
         # TODO handle inactive client
         while True:
-            # TODO handle timeout here
             self.client_entry.e.wait()
             LOGGER.info("RECEIVED PACKET: {}".format(self.client_entry.pkt))
             parsed_pkt = Packet(packet_bytes=self.client_entry.pkt)
@@ -54,15 +59,13 @@ class StopAndWaitServer:
                 LOGGER.info("Recieved Ack for packet seq {}".format(parsed_pkt.seq_num))
                 self.timer.cancel()
                 self.seq = (self.seq + 1) % 2
-                if self.file_packets_queue:
-                    # S_SERVER.sendto(
-                    #     self.file_packets_queue.popleft().bytes(),
-                    #     self.client_entry.client_address
-                    # )
+                if len(self.file_packets_queue):
                     self.send_packet_and_set_timer(self.file_packets_queue.popleft(), S_SERVER)
                 else:
                     LOGGER.info("FILE PACKETS ARE ALL SENT SUCCESSFULLY..")
                     self.timer.cancel()
+                    # close connection in Demux
+                    self.close_connection_callback()
                     break
             else:
                 LOGGER.info("Recieved File Request for file {}".format(parsed_pkt.data))
@@ -92,7 +95,7 @@ class StopAndWaitServer:
         
         return not drop
 
-def run_handler(entry, probability, seed_num):
+def run_handler(entry, probability, seed_num, close_connection_callback):
     """ runs handler """
-    server = StopAndWaitServer(entry, probability, seed_num)
+    server = StopAndWaitServer(entry, probability, seed_num, close_connection_callback)
     server.start()

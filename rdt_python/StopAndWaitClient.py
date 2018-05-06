@@ -9,11 +9,16 @@ from helpers.Simulators import get_loss_simulator
 
 CONFIG_FILE = "inputs/client.in"
 PACKET_LEN = 50
-TIMEOUT = 5
+TIMEOUT = 3
 
 # Logger configs
 logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
@@ -25,7 +30,7 @@ SERVER_IP, SERVER_PORT, CLIENT_PORT, FILE, RCV_WINDOW_SIZE = client_config(
 # TODO: Multiple clients on different ports
 # Creating client socket
 S_CLIENT = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-S_CLIENT.bind(('localhost', CLIENT_PORT))
+S_CLIENT.bind(('localhost', 9222))
 
 timer = None
 
@@ -54,7 +59,7 @@ def main_receive_loop(file_name, probability, seed_num):
         if recieved_pkt.seq_num is not seq_number:
             # Last packet is not received
             print("OUT OF SEQ PACKET RECIEVED")
-            S_CLIENT.sendto(pkt.bytes(), (SERVER_IP, SERVER_PORT))
+            S_CLIENT.sendto(ack_pkt.bytes(), (SERVER_IP, SERVER_PORT))
             continue
         # Acknowledge received packet
         buffer.append(recieved_pkt.data)
@@ -68,7 +73,6 @@ def main_receive_loop(file_name, probability, seed_num):
             with open("recieved/{}".format(file_name.split('/')[-1]), 'w') as f:
                 f.write(''.join(buffer))
             LOGGER.info("FILE RECEIVED AND SAVED...")
-            print("FILE RECEIVED AND SAVED...")
             break
     
 def send_packet_and_set_timer(pkt, server_socket):
