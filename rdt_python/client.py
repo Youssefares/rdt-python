@@ -25,7 +25,7 @@ if __name__ == '__main__':
     probability = 0.3
     seed_num = 3000
     if client_protocol == 'sw':
-      main_receive_loop(file_name, probability, seed_num)
+      main_receive_loop(FILE, probability, seed_num)
     else:
       # get class constructor from first cmd line arg
       client = client_class_dict[client_protocol]
