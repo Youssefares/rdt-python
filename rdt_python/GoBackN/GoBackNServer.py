@@ -5,8 +5,10 @@ import sys
 
 from .GoBackNSender import GoBackNSender
 from Packet import Packet
+from config import server_config
 
-WINDOW_SIZE = 10
+CONFIG_FILE = "inputs/server.in"
+_, WINDOW_SIZE, _, _ = server_config(CONFIG_FILE)
 TIMEOUT_TIME = 1
 PACKET_LENGTH = 80*8
 

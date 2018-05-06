@@ -6,8 +6,11 @@ import logging
 from Packet import Packet
 from helpers.window_range import window_range
 from helpers.Simulators import get_corrupt_simulator
+from config import client_config
 
-WINDOW_SIZE = 3
+CONFIG_FILE = "inputs/client.in"
+_, _, _, _, WINDOW_SIZE = client_config(CONFIG_FILE)
+
 TIMEOUT_TIME = 1
 # Logger configs
 LOGGER = logging.getLogger(__name__)
@@ -31,6 +34,7 @@ class SelectiveRepeatClient:
         self.buffer = []
         self.seq_nums = [i for i in range(WINDOW_SIZE*2)]
         self.corrupt_or_not = get_corrupt_simulator(probability, seed_num)
+        LOGGER.info("WINDOW_SIZE: {}".format(WINDOW_SIZE))
 
     def send_file_name(self, server_address, file_name_packet):
       self.socket.sendto(file_name_packet.bytes(), server_address)
@@ -45,6 +49,7 @@ class SelectiveRepeatClient:
         # send request
         file_name_packet = Packet(seq_num=0, data=file_name)
         self.send_file_name(server_address, file_name_packet)
+        self.start_time = time.time()
         print('File Request sent')
         LOGGER.info('File request sent, File name: {}'.format(file_name))
 
@@ -58,19 +63,24 @@ class SelectiveRepeatClient:
         # keep recieving packets and break if the last packet had a EOT
         LOGGER.info('Starting Recieve Loop.')
         while True:
-            # TODO: Add timeouts
-            pkt = Packet(packet_bytes=recieved_queue.get())
-            self.timer.cancel()
-            LOGGER.info('Recieved Packet {}'.format(pkt))
-            self.process_received_packet(pkt, server_address)
+            try:
+                pkt = Packet(packet_bytes=self.corrupt_or_not(recieved_queue.get()))
+                self.timer.cancel()
+                LOGGER.info('Recieved Packet {}'.format(pkt))
+                self.process_received_packet(pkt, server_address)
 
-            # check if last packet join the thread and exit
-            if pkt.is_last_pkt:
-                LOGGER.info('Last Packet recieved, creating file.')
-                end_event.set()
-                with open('recieved/'+dst_file_name, 'w') as f:
-                    f.write(''.join(self.buffer))
-                    break
+                # check if last packet join the thread and exit
+                if pkt.is_last_pkt:
+                    self.end_time = time.time()
+                    LOGGER.info('Last Packet recieved, creating file.')
+                    LOGGER.info("Time elapsed: {}".format(self.end_time-self.start_time))
+                    end_event.set()
+                    with open('recieved/'+dst_file_name, 'w') as f:
+                        f.write(''.join(self.buffer))
+                        break
+            except ValueError:
+                LOGGER.info("Packet {} is corrupted (ignored)".format(pkt))
+
                 
     def recieve_packets(self, queue, end_event):
         LOGGER.info('Reciever Starting...')
@@ -82,10 +92,7 @@ class SelectiveRepeatClient:
     def process_received_packet(self, pkt, server_address):
         LOGGER.info("rcv_window is in: {} ".format(list(window_range(self.rcv_base, WINDOW_SIZE))))
         if pkt.seq_num in window_range(self.rcv_base, WINDOW_SIZE):
-            if pkt.is_last_pkt:
-                self.pre_buffer[pkt.seq_num] = pkt.data[:-1]
-            else:
-                self.pre_buffer[pkt.seq_num] = pkt.data
+            self.pre_buffer[pkt.seq_num] = pkt.data
             # send ack for this packet
             self.socket.sendto(Packet(seq_num=pkt.seq_num, data='').bytes(), server_address)
             LOGGER.info("Sent Ack for Packet {}".format(pkt))

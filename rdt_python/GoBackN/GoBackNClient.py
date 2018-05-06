@@ -6,8 +6,10 @@ import logging
 
 from Packet import Packet
 from helpers.Simulators import get_corrupt_simulator
+from config import client_config
 
-WINDOW_SIZE = 10
+CONFIG_FILE = "inputs/client.in"
+_, _, _, _, WINDOW_SIZE = client_config(CONFIG_FILE)
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
@@ -39,7 +41,8 @@ class GoBackNClient:
         # send request
         self.socket.sendto(Packet(seq_num=0, data=file_name).bytes(), server_address)
         LOGGER.info('File request sent, File name: {}'.format(file_name))
-
+        self.start_time = time.time()
+        
         # start queue reciving thread
         recieved_queue = Queue()
         end_event = Event()
@@ -71,11 +74,13 @@ class GoBackNClient:
 
                 # check if last packet join the thread and exit
                 if pkt.is_last_pkt:
+                    self.end_time = time.time()
                     LOGGER.info('Last Packet recieved, creating file.')
                     end_event.set()
                     with open('recieved/'+save_file_name, 'w') as f:
                         f.write(''.join(buffer))
                     LOGGER.info('File Recieved Successfully.. Exiting')
+                    LOGGER.info("Time elapsed: {}".format(self.end_time-self.start_time))
                     break
 
             else:

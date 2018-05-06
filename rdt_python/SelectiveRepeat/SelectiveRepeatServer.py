@@ -5,8 +5,10 @@ import socket
 
 from Packet import Packet
 from helpers.Simulators import get_loss_simulator
+from config import server_config
 
-WINDOW_SIZE = 3
+CONFIG_FILE = "inputs/server.in"
+_, WINDOW_SIZE, _, _ = server_config(CONFIG_FILE)
 TIMEOUT_TIME = 1
 PACKET_LENGTH = 80*8
 
@@ -22,6 +24,7 @@ TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
 LOGGER.addHandler(TERIMAL_HANDLER)
 
+
 class SelectiveRepeatServer:
     """
     Main entry point for SelectiveRepeat Server
@@ -35,6 +38,7 @@ class SelectiveRepeatServer:
         self.timers_lock = Lock()
         self.drop_this_packet = get_loss_simulator(probability, seed_num)
         self.close_connection_callback = close_connection_callback
+        LOGGER.info("WINDOW_SIZE: {}".format(WINDOW_SIZE))
 
     def send_packet(self, i, pkt):
         """

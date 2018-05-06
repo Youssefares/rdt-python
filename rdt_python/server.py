@@ -11,15 +11,7 @@ from DemuxHandler import DemuxHandler
 
 # Constants
 CONFIG_FILE = "inputs/server.in"
-PACKET_LEN = 500
 
-# CMD args
-# if len(sys.argv) > 2:
-#   raise Exception('Usage: server.py input_file.in')
-# elif len(sys.argv) == 2:
-#   CONFIG_FILE = sys.argv[2]
-
-# Logger configs
 logging.basicConfig(level=logging.DEBUG)
 LOGGER = logging.getLogger(__name__)
 
@@ -52,10 +44,8 @@ S_SERVER.bind(('localhost', SERVER_PORT))
 
 if __name__ == '__main__':
   server_protocol = sys.argv[1] if sys.argv[1] else 'gbn'
-  probability = 0.3
-  seed_num = 1000
 
-  demux_handler = DemuxHandler(server_protocol, probability, seed_num)
+  demux_handler = DemuxHandler(server_protocol, LOSS_PROP, RND_SEED)
   while True:
     PACKET, ADDR = S_SERVER.recvfrom(512) #Buffer_size = 512
     demux_handler.demux_or_create(packet=PACKET, address=ADDR)

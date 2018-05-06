@@ -22,7 +22,7 @@ def server_config(file):
     configs.append(line[:-1])
 
   server_port = int(configs[0])
-  snd_window_size = configs[1]
+  snd_window_size = int(configs[1])
   rnd_seed = int(configs[2])
   loss_prop = float(configs[3])
 

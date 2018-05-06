@@ -1,8 +1,16 @@
-from GoBackN.GoBackNClient import GoBackNClient
-from SelectiveRepeat.SelectiveRepeatClient import SelectiveRepeatClient
-
 import logging
 import sys
+
+from GoBackN.GoBackNClient import GoBackNClient
+from SelectiveRepeat.SelectiveRepeatClient import SelectiveRepeatClient
+from config import client_config
+
+
+# Constants
+CONFIG_FILE = "inputs/client.in"
+
+# More Constants
+SERVER_IP, SERVER_PORT, CLIENT_PORT, FILE, RCV_WINDOW_SIZE = client_config(CONFIG_FILE)
 
 client_class_dict = {
   'gbn': GoBackNClient,
@@ -11,8 +19,7 @@ client_class_dict = {
 
 if __name__ == '__main__':
     client_protocol = sys.argv[1]
-    port_num = int(sys.argv[2])
-    dest = sys.argv[3]
+    dest = sys.argv[2]
 
     # get class constructor from first cmd line arg
     client = client_class_dict[client_protocol]
@@ -21,4 +28,4 @@ if __name__ == '__main__':
     seed_num = 3000
 
     logging.basicConfig(level=logging.DEBUG)
-    client(('localhost', port_num), probability, seed_num).request_file(('localhost', 6222), 'public/small_file.txt', dest)
+    client(('localhost', CLIENT_PORT), probability, seed_num).request_file((SERVER_IP, SERVER_PORT), FILE, dest)
