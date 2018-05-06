@@ -18,4 +18,4 @@ if __name__ == '__main__':
     client = client_class_dict[client_protocol]
 
     logging.basicConfig(level=logging.DEBUG)
-    client(('localhost', port_num)).request_file(('localhost', 6222), 'public/small_file.txt', dest)
+    client(('localhost', port_num)).request_file(('localhost', 6222), 'public/big_file.txt', dest)

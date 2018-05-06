@@ -83,7 +83,6 @@ class Packet:
                 packets[-1].data += EOT_CHR
             else:
                 packets.append(Packet(seq_num=seq_num, data=EOT_CHR))
-        print(packets)
         return packets
 
 
