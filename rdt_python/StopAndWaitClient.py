@@ -5,7 +5,7 @@ from threading import Timer
 
 from config import client_config
 from Packet import Packet
-from helpers.Simulators import get_loss_simulator
+from helpers.Simulators import get_corrupt_simulator
 
 CONFIG_FILE = "inputs/client.in"
 PACKET_LEN = 50
@@ -37,7 +37,7 @@ timer = None
 def main_receive_loop(file_name, probability, seed_num):
     seq_number = 0
     buffer = []
-    drop_current = get_loss_simulator(probability, seed_num)
+    corrupt_or_not = get_corrupt_simulator(probability, seed_num)
 
     LOGGER.info("Starting Stop and Wait Client..")
 
@@ -46,6 +46,7 @@ def main_receive_loop(file_name, probability, seed_num):
     # S_CLIENT.sendto(pkt.bytes(), (SERVER_IP, SERVER_PORT))
     LOGGER.info("File Request Sent.")
 
+    recieved_pkt = None
     while True:
         # FIXME: 512 should be el buffer size exactly
         packet, address = S_CLIENT.recvfrom(512)
@@ -54,8 +55,15 @@ def main_receive_loop(file_name, probability, seed_num):
         # time.sleep(0.5)
         LOGGER.info("RECEIVED PACKET: {}".format(packet))
         print("RECEIVED PACKET: {}".format(packet))
-        recieved_pkt = Packet(packet_bytes=packet)
 
+        try:
+            recieved_pkt = Packet(packet_bytes=corrupt_or_not(packet))
+        except ValueError:
+            # Packet is corrupted resend last packet
+            LOGGER.info("Packet {} is corrupted".format(packet))
+            S_CLIENT.sendto(ack_pkt.bytes(), (SERVER_IP, SERVER_PORT))
+            continue
+        
         if recieved_pkt.seq_num is not seq_number:
             # Last packet is not received
             print("OUT OF SEQ PACKET RECIEVED")

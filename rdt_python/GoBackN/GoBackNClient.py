@@ -5,11 +5,17 @@ from threading import Thread, Event
 import logging
 
 from Packet import Packet
+from helpers.Simulators import get_corrupt_simulator
 
 WINDOW_SIZE = 10
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
@@ -17,9 +23,10 @@ LOGGER.addHandler(TERIMAL_HANDLER)
 
 
 class GoBackNClient:
-    def __init__(self, client_address):
+    def __init__(self, client_address, probability, seed_num):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.socket.bind(client_address)
+        self.corrupt_or_not = get_corrupt_simulator(probability, seed_num)
 
     def request_file(self, server_address, file_name, save_file_name):
         """
@@ -42,10 +49,15 @@ class GoBackNClient:
 
         # keep recieving packets and break if the last packet had a EOT
         LOGGER.info('Starting Recieve Loop.')
+
+        pkt = None
         while True:
-            # TODO: Add timeouts
-            pkt = Packet(packet_bytes=recieved_queue.get())
-            LOGGER.info('Recieved Packet {}'.format(pkt))
+            try:
+                pkt = Packet(packet_bytes=self.corrupt_or_not(recieved_queue.get()))
+                LOGGER.info('Recieved Packet {}'.format(pkt))
+            except ValueError:
+                LOGGER.info("Packet {} is corrupted".format(pkt))
+                self.socket.sendto(Packet(seq_num=last_recieved, data='').bytes(), server_address)
 
             if pkt.seq_num == to_be_recieved:
                 LOGGER.info('Packet is in sequence, adding it to buffer.')

@@ -17,5 +17,8 @@ if __name__ == '__main__':
     # get class constructor from first cmd line arg
     client = client_class_dict[client_protocol]
 
+    probability = 0.3
+    seed_num = 3000
+
     logging.basicConfig(level=logging.DEBUG)
-    client(('localhost', port_num)).request_file(('localhost', 6222), 'public/small_file.txt', dest)
+    client(('localhost', port_num), probability, seed_num).request_file(('localhost', 6222), 'public/small_file.txt', dest)

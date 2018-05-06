@@ -5,6 +5,7 @@ from threading import Thread, Event, Timer
 import logging
 from Packet import Packet
 from helpers.window_range import window_range
+from helpers.Simulators import get_corrupt_simulator
 
 WINDOW_SIZE = 3
 TIMEOUT_TIME = 1
@@ -21,7 +22,7 @@ TERIMAL_HANDLER.setLevel(logging.DEBUG)
 LOGGER.addHandler(TERIMAL_HANDLER)
 
 class SelectiveRepeatClient:
-    def __init__(self, client_address):
+    def __init__(self, client_address, probability, seed_num):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.socket.bind(client_address)
         #self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -29,11 +30,13 @@ class SelectiveRepeatClient:
         self.pre_buffer = [None]*(2*WINDOW_SIZE)
         self.buffer = []
         self.seq_nums = [i for i in range(WINDOW_SIZE*2)]
+        self.corrupt_or_not = get_corrupt_simulator(probability, seed_num)
 
     def send_file_name(self, server_address, file_name_packet):
       self.socket.sendto(file_name_packet.bytes(), server_address)
       self.timer = Timer(TIMEOUT_TIME, self.send_file_name, args=[server_address, file_name_packet])
       self.timer.start()
+      
     def request_file(self, server_address, file_name, dst_file_name):
         """
         Request file from server using GoBackN protocol

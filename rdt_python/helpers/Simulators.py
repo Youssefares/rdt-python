@@ -1,4 +1,4 @@
-from random import sample, seed
+from random import sample, seed, randint
 
 def get_loss_simulator(probability, seed_num):
     """
@@ -21,6 +21,22 @@ def get_loss_simulator(probability, seed_num):
         return drop
 
     return to_drop_current
+
+def get_corrupt_simulator(probability, seed_num):
+    """
+    Simulates Packet corruption using the same loss simulator but not dropping
+    the packet entirely but instead change a random bit to corrupt it
+    """
+    seed(seed_num)
+    corrupt_it = get_loss_simulator(probability, seed_num)
+
+    def corrupt_or_not(packet):
+        if corrupt_it():
+            r = randint(0, len(packet) - 1)
+            packet = packet[0: r] + bytes(1) + packet[r:]
+        return packet
+    
+    return corrupt_or_not
 
 if __name__ == '__main__':
     p = 0.3
