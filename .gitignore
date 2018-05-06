@@ -5,4 +5,4 @@ __pycache__/
 *.pyc
 rdt_python/received/
 rdt_python/recieved/
-logs/*
+logs/

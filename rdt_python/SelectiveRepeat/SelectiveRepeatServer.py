@@ -4,13 +4,19 @@ import logging
 import socket
 
 from Packet import Packet
+from helpers.Simulators import get_loss_simulator
 
-WINDOW_SIZE = 5
-TIMEOUT_TIME = 10
-PACKET_LENGTH = 80
+WINDOW_SIZE = 3
+TIMEOUT_TIME = 1
+PACKET_LENGTH = 80*8
 
 # Logger configs
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
@@ -26,21 +32,25 @@ class SelectiveRepeatServer:
         self.next_seq_num = 0
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.client_address = self.client_entry.client_address
-        self.timers_lock = Lock() 
+        self.timers_lock = Lock()
+        self.drop_this_packet = get_loss_simulator(0.3, 1000)
 
     def send_packet(self, i, pkt):
         """
         Sends packet in selective repeat window with timeout
         """
-        self.socket.sendto(pkt.bytes(), self.client_address)
-        LOGGER.info("Sent packet: {}".format(pkt))
-        LOGGER.info("Waiting for lock to start timer again")
+        if self.drop_this_packet():
+          LOGGER.info("Dropped packet: {}".format(pkt))
+        else:
+          self.socket.sendto(pkt.bytes(), self.client_address)
+          LOGGER.info("Sent packet: {}".format(pkt))
+        # LOGGER.info("Waiting for lock to start timer again")
         with self.timers_lock:
-            LOGGER.info("Acquired lock")
+            # LOGGER.info("Acquired lock")
             timer = Timer(TIMEOUT_TIME, self.send_packet, args=[i, pkt])
             self.threads_and_timers[i][1] = timer
             timer.start()
-        LOGGER.info("Released lock")
+        # LOGGER.info("Released lock")
 
 
     
@@ -78,30 +88,36 @@ class SelectiveRepeatServer:
             try:
                 # stop sending ack'ed packets in the window
                 ack_packet = Packet(packet_bytes=self.client_entry.queue.get())
-                LOGGER.info("Received ack_packet: ".format(ack_packet))
+                LOGGER.info("Received ack_packet: {}".format(ack_packet))
                 # look for seq_num in window (packets starting at send_base)
                 # .. raises ValueError if find doesn't find seq_num
+                LOGGER.info("snd_window is in: {} ".format(packets_sequences[self.send_base: self.send_base+ WINDOW_SIZE]))
                 index = packets_sequences.index(ack_packet.seq_num, self.send_base, min(self.send_base+WINDOW_SIZE, len(packets)))
                 
-                LOGGER.info("Waiting for lock to stop timer")
+                # LOGGER.info("Waiting for lock to stop timer")
                 with self.timers_lock:
-                    LOGGER.info("Acquired lock")
+                    # LOGGER.info("Acquired lock")
                     _, timer = self.threads_and_timers[index]
                     LOGGER.info("ack_packet in window, stopping timer")
                     timer.cancel()
                     self.threads_and_timers[index] = None
-                LOGGER.info("Released lock")
+                # LOGGER.info("Released lock")
 
                 # sliding
                 if ack_packet.seq_num == packets[self.send_base].seq_num:
                     old_send_base = self.send_base
+                    d = {packets_sequences[self.send_base+i]: t_h for i, t_h in enumerate(self.threads_and_timers[self.send_base: min(self.send_base+WINDOW_SIZE, len(packets))])}
+                    LOGGER.info("{}".format(d))
                     for i in range(self.send_base, min(self.send_base+WINDOW_SIZE, len(packets))):
-                        LOGGER.info("Waiting for lock to slide")
+                        # LOGGER.info("Waiting for lock to slide")
                         with self.timers_lock:
-                            LOGGER.info("Acquired lock")
+                            # LOGGER.info("Acquired lock")
                             if self.threads_and_timers[i] is None:
+                                LOGGER.info("packet with seq_num #{} is None".format(packets_sequences[i]))
                                 self.send_base += 1
-                        LOGGER.info("Released lock")
+                            else:
+                              break
+                        # LOGGER.info("Released lock")
                     LOGGER.info("\n\n\nSlid send_base from {} to {}".format(old_send_base, self.send_base))
                                 
 

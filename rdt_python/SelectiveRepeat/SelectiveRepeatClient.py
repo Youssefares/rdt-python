@@ -1,18 +1,24 @@
 import socket
 import time
 from queue import Queue
-from threading import Thread, Event
+from threading import Thread, Event, Timer
 import logging
 from Packet import Packet
+from helpers.window_range import window_range
 
-WINDOW_SIZE = 5
+WINDOW_SIZE = 3
+TIMEOUT_TIME = 1
 # Logger configs
 LOGGER = logging.getLogger(__name__)
+
+FILE_HANDLER = logging.FileHandler('logs/{}.txt'.format(__name__))
+FILE_HANDLER.setLevel(logging.DEBUG)
+LOGGER.addHandler(FILE_HANDLER)
+
 TERIMAL_HANDLER = logging.StreamHandler()
 TERIMAL_HANDLER.setFormatter(logging.Formatter(">> %(asctime)s:%(threadName)s:%(levelname)s:%(module)s:%(message)s"))
 TERIMAL_HANDLER.setLevel(logging.DEBUG)
 LOGGER.addHandler(TERIMAL_HANDLER)
-
 
 class SelectiveRepeatClient:
     def __init__(self, client_address):
@@ -22,14 +28,20 @@ class SelectiveRepeatClient:
         self.rcv_base = 0
         self.pre_buffer = [None]*(2*WINDOW_SIZE)
         self.buffer = []
+        self.seq_nums = [i for i in range(WINDOW_SIZE*2)]
 
+    def send_file_name(self, server_address, file_name_packet):
+      self.socket.sendto(file_name_packet.bytes(), server_address)
+      self.timer = Timer(TIMEOUT_TIME, self.send_file_name, args=[server_address, file_name_packet])
+      self.timer.start()
     def request_file(self, server_address, file_name, dst_file_name):
         """
         Request file from server using GoBackN protocol
         """
 
         # send request
-        self.socket.sendto(Packet(seq_num=0, data=file_name).bytes(), server_address)
+        file_name_packet = Packet(seq_num=0, data=file_name)
+        self.send_file_name(server_address, file_name_packet)
         print('File Request sent')
         LOGGER.info('File request sent, File name: {}'.format(file_name))
 
@@ -45,8 +57,8 @@ class SelectiveRepeatClient:
         while True:
             # TODO: Add timeouts
             pkt = Packet(packet_bytes=recieved_queue.get())
+            self.timer.cancel()
             LOGGER.info('Recieved Packet {}'.format(pkt))
-
             self.process_received_packet(pkt, server_address)
 
             # check if last packet join the thread and exit
@@ -61,17 +73,19 @@ class SelectiveRepeatClient:
         LOGGER.info('Reciever Starting...')
         while not end_event.is_set():
             packet, _ = self.socket.recvfrom(512)
-            LOGGER.info('Packet Recieved {}'.format(packet))
+            # LOGGER.info('Packet Recieved {}'.format(packet))
             queue.put(packet)
 
     def process_received_packet(self, pkt, server_address):
-        if pkt.seq_num in range(self.rcv_base, self.rcv_base+WINDOW_SIZE):
+        LOGGER.info("rcv_window is in: {} ".format(list(window_range(self.rcv_base, WINDOW_SIZE))))
+        if pkt.seq_num in window_range(self.rcv_base, WINDOW_SIZE):
             if pkt.is_last_pkt:
                 self.pre_buffer[pkt.seq_num] = pkt.data[:-1]
             else:
                 self.pre_buffer[pkt.seq_num] = pkt.data
             # send ack for this packet
             self.socket.sendto(Packet(seq_num=pkt.seq_num, data='').bytes(), server_address)
+            LOGGER.info("Sent Ack for Packet {}".format(pkt))
         if pkt.seq_num in range(self.rcv_base-WINDOW_SIZE, self.rcv_base):
             # send ack for this packet
             self.socket.sendto(Packet(seq_num=pkt.seq_num, data='').bytes(), server_address)
@@ -81,12 +95,14 @@ class SelectiveRepeatClient:
 
     def slide_buffer(self):
         new_base = self.rcv_base
-        for i in range(self.rcv_base, 2*WINDOW_SIZE):
+        LOGGER.info(self.pre_buffer)
+        for i in window_range(self.rcv_base, WINDOW_SIZE):
             if self.pre_buffer[i] is None:
                 break
             self.buffer.append(self.pre_buffer[i])
             self.pre_buffer[i] = None
             new_base = (new_base + 1) % (2*WINDOW_SIZE)
+        LOGGER.info("Slid rcv_base from {} to {}".format(self.rcv_base, new_base))
         self.rcv_base = new_base
 
 
