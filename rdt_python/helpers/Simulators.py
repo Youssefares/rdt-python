@@ -11,9 +11,7 @@ def get_loss_simulator(probability, seed_num):
     drop_indicies = sample(range(0, 10), int(probability * 10))
     def to_drop_current():
         nonlocal current_i, drop_indicies
-        drop = False
-        if current_i in drop_indicies:
-            drop = True
+        drop = current_i in drop_indicies
         current_i += 1
         if current_i % 10 == 0:
             drop_indicies = sample(range(0, 10), int(probability * 10))
